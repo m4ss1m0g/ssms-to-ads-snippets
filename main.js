@@ -5,7 +5,7 @@ const getFiles = require("node-recursive-directory");
 // Azure data studio folder
 // C:\Users\user\AppData\Roaming\azuredatastudio\User\snippets
 
-const user = "user";
+const user = "massimo";
 const templatePath = path.normalize(
     `C:/Users/${user}/AppData/Roaming/Microsoft/SQL Server Management Studio/18.0/Templates/Sql`
 );
@@ -74,17 +74,21 @@ const outDir = "C:/temp/snippets";
 
         const dirs = [...new Set(snippets.map((p) => p.dir))];
 
-        for (const dir of dirs) {
-            const dirNew = path.resolve(outDir, dir);
+        if (!fs.existsSync(outDir)) {
+            await fs.promises.mkdir(outDir, { recursive: true });
+        }
 
-            if (!fs.existsSync(dirNew)) {
-                await fs.promises.mkdir(dirNew, { recursive: true });
-            }
-            let s = snippets.filter((p) => p.dir === dir);
-            await fs.promises.writeFile(
-                path.resolve(dirNew, "snippet.code-snippets"),
-                s.map((p) => p.snippet).join(",")
+        for (const dir of dirs) {
+            const dirNew = path.resolve(
+                outDir,
+                `${dir}.code-snippets`.toLowerCase()
             );
+            let s = snippets
+                .filter((p) => p.dir === dir)
+                .map((p) => p.snippet)
+                .join(",");
+            s = `{${s}}`;
+            await fs.promises.writeFile(dirNew, s);
         }
     }
 

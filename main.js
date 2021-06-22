@@ -2,20 +2,35 @@ const fs = require("fs");
 const path = require("path");
 const getFiles = require("node-recursive-directory");
 
-// Azure data studio folder
-// C:\Users\user\AppData\Roaming\azuredatastudio\User\snippets
-
+// windows user
 const user = "massimo";
-const templatePath = path.normalize(
+
+// SSMS template folder
+const ssmsTemplatesPath = path.normalize(
     `C:/Users/${user}/AppData/Roaming/Microsoft/SQL Server Management Studio/18.0/Templates/Sql`
 );
-const outDir = "C:/temp/snippets";
+// Azure data studio folder
+const outDir = "C:/Users/${user}/AppData/Roaming/azuredatastudio/User/snippets";
 
 (async () => {
+    /**
+     * Replace all occurences without regex
+     *
+     * @param {*} string The string where search
+     * @param {*} search The string to replace
+     * @param {*} replace The new string 
+     * @returns The string replaced
+     */
     function replaceAll(string, search, replace) {
         return string.split(search).join(replace);
     }
 
+    /**
+     * Parse the xml ssms template file
+     *
+     * @param {*} template The template file to parse
+     * @returns The template body with VSCode placeholders
+     */
     function parseBody(template) {
         const re = new RegExp(/<.*?>/gm);
         let matches = template.match(re);
@@ -40,6 +55,13 @@ const outDir = "C:/temp/snippets";
         return template;
     }
 
+    /**
+     * Create the json snippet as VSCode compatible fomrat
+     *
+     * @param {*} prefix The prefix for the snippet
+     * @param {*} fileName The SSMS template file name to convert
+     * @returns The JSON snippet
+     */
     async function createSnippet(prefix, fileName) {
         let name = path.parse(fileName).name;
         let template = await fs.promises.readFile(fileName, {
@@ -60,9 +82,11 @@ const outDir = "C:/temp/snippets";
         return `"${name}":${JSON.stringify(snippet, null, 4)}`;
     }
 
-    // MAIN
+    /**
+     * Main Function
+     */
     async function main() {
-        const files = await getFiles(templatePath, true);
+        const files = await getFiles(ssmsTemplatesPath, true);
 
         let snippets = [];
         for (const file of files) {
@@ -92,6 +116,7 @@ const outDir = "C:/temp/snippets";
         }
     }
 
+    // Execute the main function
     try {
         await main();
     } catch (error) {

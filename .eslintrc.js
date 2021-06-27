@@ -1,15 +1,17 @@
 module.exports = {
-    "env": {
-        "es2021": true,
-        "node": true
+    env: {
+        es2021: true,
+        node: true
     },
-    "extends": [
-        "standard"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 12,
-        "sourceType": "module"
+    extends: ["standard"],
+    parserOptions: {
+        ecmaVersion: 12,
+        sourceType: "module"
     },
-    "rules": {
+    rules: {
+        indent: ["error", 4],
+        semi: ["error", "always"],
+        quotes: ["error", "double"],
+        "space-before-function-paren": ["error", "never"]
     }
 };

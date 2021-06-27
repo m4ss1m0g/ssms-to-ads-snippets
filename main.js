@@ -3,22 +3,22 @@ const path = require("path");
 const getFiles = require("node-recursive-directory");
 
 // windows user
-const user = "massimo";
+const user = "john";
 
 // SSMS template folder
 const ssmsTemplatesPath = path.normalize(
     `C:/Users/${user}/AppData/Roaming/Microsoft/SQL Server Management Studio/18.0/Templates/Sql`
 );
 // Azure data studio folder
-const outDir = "C:/Users/${user}/AppData/Roaming/azuredatastudio/User/snippets";
+const outDir = `C:/Users/${user}/AppData/Roaming/azuredatastudio/User/snippets`;
 
-(async () => {
+(async() => {
     /**
      * Replace all occurences without regex
      *
      * @param {*} string The string where search
      * @param {*} search The string to replace
-     * @param {*} replace The new string 
+     * @param {*} replace The new string
      * @returns The string replaced
      */
     function replaceAll(string, search, replace) {
@@ -32,17 +32,17 @@ const outDir = "C:/Users/${user}/AppData/Roaming/azuredatastudio/User/snippets";
      * @returns The template body with VSCode placeholders
      */
     function parseBody(template) {
-        const re = new RegExp(/<.*?>/gm);
-        let matches = template.match(re);
+        const re = /<.*?>/gm;
+        const matches = template.match(re);
 
         if (matches && matches.length > 0) {
             let idx = 1;
 
-            let distinct = [...new Set(matches)];
+            const distinct = [...new Set(matches)];
 
             for (const e of distinct) {
                 const values = e.replace("<", "").replace(">", "").split(",");
-                let value = values
+                const value = values
                     .slice(2)
                     .map((e) => e.trim())
                     .join(",");
@@ -63,20 +63,20 @@ const outDir = "C:/Users/${user}/AppData/Roaming/azuredatastudio/User/snippets";
      * @returns The JSON snippet
      */
     async function createSnippet(prefix, fileName) {
-        let name = path.parse(fileName).name;
-        let template = await fs.promises.readFile(fileName, {
-            encoding: "utf-8",
+        const name = path.parse(fileName).name;
+        const template = await fs.promises.readFile(fileName, {
+            encoding: "utf-8"
         });
 
-        let body = parseBody(template);
+        const body = parseBody(template);
         prefix = `${prefix}${name.replace(/ /gm, "")}`;
-        let description = name;
+        const description = name;
 
-        let snippet = {
+        const snippet = {
             scope: "sql",
             prefix,
             body,
-            description,
+            description
         };
 
         return `"${name}":${JSON.stringify(snippet, null, 4)}`;
@@ -88,7 +88,7 @@ const outDir = "C:/Users/${user}/AppData/Roaming/azuredatastudio/User/snippets";
     async function main() {
         const files = await getFiles(ssmsTemplatesPath, true);
 
-        let snippets = [];
+        const snippets = [];
         for (const file of files) {
             // console.log(file);
             const dir = file.dirname;

@@ -1,0 +1,91 @@
+{"Alter Change Tracking on Database":{
+    "scope": "sql",
+    "prefix": "ssmsAlterChangeTrackingonDatabase",
+    "body": [
+        "-- ===============================================================",
+        "-- Alter database with modifyingt change tracking options template",
+        "-- ===============================================================",
+        "USE master",
+        "GO",
+        "",
+        "ALTER DATABASE ${1:Database_Name} SET CHANGE_TRACKING ",
+        "(",
+        "\tCHANGE_RETENTION = ${2:Retention_Period} ${3:Retention_Period_Units} ,",
+        "\tAUTO_CLEANUP = ${4:Auto_Cleanup}",
+        ")",
+        "GO"
+    ],
+    "description": "Alter Change Tracking on Database"
+},"Disable Change Tracking on Database":{
+    "scope": "sql",
+    "prefix": "ssmsDisableChangeTrackingonDatabase",
+    "body": [
+        "-- =============================================",
+        "-- Alter database with Disable change tracking template",
+        "-- =============================================",
+        "USE master",
+        "GO",
+        "",
+        "ALTER DATABASE ${1:Database_Name} SET CHANGE_TRACKING = OFF",
+        "GO"
+    ],
+    "description": "Disable Change Tracking on Database"
+},"Disable Change Tracking on Table":{
+    "scope": "sql",
+    "prefix": "ssmsDisableChangeTrackingonTable",
+    "body": [
+        "--==========================================================================",
+        "-- Alter Table Change Tracking template",
+        "--",
+        "-- This template enables the Change Tracking on Table with options",
+        "--==========================================================================",
+        "USE MASTER",
+        "GO",
+        "",
+        "ALTER TABLE ${1:dbo}.${2:table_name}",
+        "\tDISABLE CHANGE_TRACKING\t",
+        "GO",
+        ""
+    ],
+    "description": "Disable Change Tracking on Table"
+},"Enable Change Tracking on Table":{
+    "scope": "sql",
+    "prefix": "ssmsEnableChangeTrackingonTable",
+    "body": [
+        "--==========================================================================",
+        "-- Alter Table Enable Change Tracking template",
+        "--",
+        "-- This template enables the Change Tracking on Table with options",
+        "--==========================================================================",
+        "USE MASTER",
+        "GO",
+        "",
+        "ALTER TABLE ${1:dbo}.${2:table_name}",
+        "\tENABLE CHANGE_TRACKING\t",
+        "\tWITH ",
+        "\t(",
+        "\t\tTRACK_COLUMNS_UPDATED = ${3:<track_columns_updated} ",
+        "\t)",
+        "GO",
+        ""
+    ],
+    "description": "Enable Change Tracking on Table"
+},"Set Change Tracking on Database":{
+    "scope": "sql",
+    "prefix": "ssmsSetChangeTrackingonDatabase",
+    "body": [
+        "-- =============================================",
+        "-- Alter database Set Change Tracking On Template",
+        "-- =============================================",
+        "USE master",
+        "GO",
+        "",
+        "ALTER DATABASE ${1:Database_Name} SET CHANGE_TRACKING = ON",
+        "(",
+        "\tCHANGE_RETENTION = ${2:Retention_Period} ${3:Retention_Period_Units} ,",
+        "\tAUTO_CLEANUP = ${4:Auto_Cleanup}",
+        ")",
+        "GO"
+    ],
+    "description": "Set Change Tracking on Database"
+}}

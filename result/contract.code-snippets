@@ -1,0 +1,47 @@
+{"Create One Way Contract":{
+    "scope": "sql",
+    "prefix": "ssmsCreateOneWayContract",
+    "body": [
+        "-- =============================================",
+        "-- Create One Way contract Template",
+        "-- =============================================",
+        "",
+        "CREATE CONTRACT ${1:test_contract}",
+        "  ( ${2:to_msg} SENT BY INITIATOR )",
+        "",
+        ""
+    ],
+    "description": "Create One Way Contract"
+},"Create Request Response Contract":{
+    "scope": "sql",
+    "prefix": "ssmsCreateRequestResponseContract",
+    "body": [
+        "-- =============================================",
+        "-- Create Request Response contract Template",
+        "-- =============================================",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "",
+        "CREATE CONTRACT ${4:test_contract}",
+        "\tAUTHORIZATION ${5:dbo} ",
+        "\t( ${6:to_msg} SENT BY INITIATOR, ",
+        "      ${7:from_msg} SENT BY TARGET )",
+        ""
+    ],
+    "description": "Create Request Response Contract"
+},"Drop Contract":{
+    "scope": "sql",
+    "prefix": "ssmsDropContract",
+    "body": [
+        "-- =============================================",
+        "-- Basic Drop Contract Template",
+        "-- =============================================",
+        "",
+        "DROP CONTRACT ${1:test_contract}",
+        ""
+    ],
+    "description": "Drop Contract"
+}}

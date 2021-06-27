@@ -1,0 +1,89 @@
+{"Change Database Mirror Route Address":{
+    "scope": "sql",
+    "prefix": "ssmsChangeDatabaseMirrorRouteAddress",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Change Mirror Route Address Template",
+        "-- =============================================",
+        "",
+        "ALTER ROUTE ${1:test_route} WITH ",
+        "     MIRROR_ADDRESS = N'${2:TCP://mycomputer2.mydomain:4022}'",
+        "",
+        "",
+        ""
+    ],
+    "description": "Change Database Mirror Route Address"
+},"Change Route Address":{
+    "scope": "sql",
+    "prefix": "ssmsChangeRouteAddress",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Change Route Address Template",
+        "-- =============================================",
+        "",
+        "ALTER ROUTE ${1:test_route} WITH ",
+        "     ADDRESS = N'${2:TCP://mycomputer.mydomain:4022}'",
+        "",
+        ""
+    ],
+    "description": "Change Route Address"
+},"Create Database Mirror Route":{
+    "scope": "sql",
+    "prefix": "ssmsCreateDatabaseMirrorRoute",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Basic Create Route to Database Mirror Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "",
+        "CREATE ROUTE ${4:test_route} ",
+        "AUTHORIZATION ${5:dbo} ",
+        "WITH ",
+        "     SERVICE_NAME = N'${6:test_service}',",
+        "     BROKER_INSTANCE =  ",
+        "\tN'${7:}' , ",
+        "\tLIFETIME = ${8:86400} ,",
+        "     ADDRESS = N'${9:TCP://mycomputer.mydomain:4022}',",
+        "     MIRROR_ADDRESS = N'${10:TCP://mycomputer2.mydomain:4022}'",
+        "",
+        ""
+    ],
+    "description": "Create Database Mirror Route"
+},"Create Route":{
+    "scope": "sql",
+    "prefix": "ssmsCreateRoute",
+    "body": [
+        "-- =============================================",
+        "-- Basic Create Route Template",
+        "-- =============================================",
+        "",
+        "CREATE ROUTE ${1:test_route} ",
+        "WITH ",
+        "     SERVICE_NAME = N'${2:test_service}',",
+        "     BROKER_INSTANCE = ",
+        "\tN'${3:62BC1928-7A4A-4EFD-B72C-E6E9647A5077}' , ",
+        "     ADDRESS = N'${4:TCP://mycomputer.mydomain:4022}'",
+        ""
+    ],
+    "description": "Create Route"
+},"Drop Route":{
+    "scope": "sql",
+    "prefix": "ssmsDropRoute",
+    "body": [
+        "-- =============================================",
+        "-- Basic Drop Route Template",
+        "-- =============================================",
+        "",
+        "DROP ROUTE ${1:test_route}",
+        ""
+    ],
+    "description": "Drop Route"
+}}

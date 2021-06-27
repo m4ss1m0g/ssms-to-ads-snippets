@@ -1,0 +1,11 @@
+{"Sql":{
+    "scope": "sql",
+    "prefix": "ssmsSql",
+    "body": "SQLFile.sql|{C3507EB2-B615-4870-BCDB-10990EED0CC4}|#140|1|#141|0|0|0|#142\r\n",
+    "description": "Sql"
+},"SQLFile":{
+    "scope": "sql",
+    "prefix": "ssmsSQLFile",
+    "body": "",
+    "description": "SQLFile"
+}}

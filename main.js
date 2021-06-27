@@ -3,7 +3,7 @@ const path = require("path");
 const getFiles = require("node-recursive-directory");
 
 // windows user
-const user = "john";
+const user = "yourname";
 
 // SSMS template folder
 const ssmsTemplatesPath = path.normalize(

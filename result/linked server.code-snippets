@@ -1,0 +1,70 @@
+{"Add Linked Server Access MDB":{
+    "scope": "sql",
+    "prefix": "ssmsAddLinkedServerAccessMDB",
+    "body": [
+        "-- ========================================",
+        "-- Add Linked Server Access MDB template",
+        "-- ========================================",
+        "",
+        "EXEC sp_addlinkedserver ",
+        "\t@server = N'${1:NorthwindMDB}', ",
+        "\t@provider = N'Microsoft.Jet.OLEDB.4.0', ",
+        "\t@srvproduct = N'OLE DB Provider for Jet',",
+        "\t@datasrc = N'${2:C:\\AccessDBs\\Northwind.mdb}'",
+        "GO",
+        "",
+        "-- Set up login mapping using current user's security context",
+        "EXEC sp_addlinkedsrvlogin ",
+        "\t@rmtsrvname = N'${1:NorthwindMDB}',",
+        "\t@useself = N'TRUE',",
+        "\t@locallogin = NULL, ",
+        "\t@rmtuser = N'${3:Admin}', ",
+        "\t@rmtpassword = ${4:NULL}",
+        "GO",
+        "",
+        "-- List the tables on the linked server",
+        "EXEC sp_tables_ex N'${1:NorthwindMDB}'",
+        "GO",
+        "",
+        "-- Select all the rows from the Customer table",
+        "SELECT * FROM ${1:NorthwindMDB}...Customers",
+        ""
+    ],
+    "description": "Add Linked Server Access MDB"
+},"Add Linked Server Simple":{
+    "scope": "sql",
+    "prefix": "ssmsAddLinkedServerSimple",
+    "body": [
+        "-- =====================================",
+        "-- Add Linked Server Simplet template",
+        "-- =====================================",
+        "",
+        "-- Create linked server reference to Database Engine instance on same machine",
+        "EXEC master.dbo.sp_addlinkedserver @server = N'${1:(local)}${2:\\SQLEXPRESS}', @srvproduct=N'SQL Server'",
+        "GO",
+        "",
+        "-- Use current login's security context for the link",
+        "EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname = N'${1:(local)}${2:\\SQLEXPRESS}', @locallogin = NULL , @useself = N'True'",
+        "GO",
+        "",
+        "-- Run a test query",
+        "SELECT * FROM [${1:(local)}${2:\\SQLEXPRESS}].${3:pubs}.${4:dbo}.${5:authors}",
+        "GO",
+        ""
+    ],
+    "description": "Add Linked Server Simple"
+},"Drop Linked Server":{
+    "scope": "sql",
+    "prefix": "ssmsDropLinkedServer",
+    "body": [
+        "-- ==============================",
+        "-- Drop Linked Server template",
+        "-- ==============================",
+        "",
+        "-- Drops a linked server reference to a Database Engine instance",
+        "-- Related logins will also be dropped in this example",
+        "EXEC master.dbo.sp_dropserver @server=N'${1:(local)}${2:\\SQLEXPRESS}', @droplogins='droplogins'",
+        "GO"
+    ],
+    "description": "Drop Linked Server"
+}}

@@ -1,0 +1,40 @@
+{"Create Certificate":{
+    "scope": "sql",
+    "prefix": "ssmsCreateCertificate",
+    "body": [
+        "--=================================",
+        "-- Create certificate template",
+        "--=================================",
+        "IF EXISTS(",
+        "  SELECT * ",
+        "    FROM sys.certificates ",
+        "   WHERE name = N'${1:sample_certificate}'",
+        ")",
+        "DROP CERTIFICATE ${1:sample_certificate}",
+        "GO",
+        "",
+        "CREATE CERTIFICATE ${1:sample_certificate} ",
+        "\tENCRYPTION BY PASSWORD = ${2:'1()ds5274-785$0HA05432-22379;}'}",
+        "\tWITH SUBJECT = ${3:'MySampleCertificate'};",
+        "GO",
+        ""
+    ],
+    "description": "Create Certificate"
+},"Drop Certificate":{
+    "scope": "sql",
+    "prefix": "ssmsDropCertificate",
+    "body": [
+        "--=================================",
+        "-- Drop certificate template",
+        "--=================================",
+        "IF EXISTS(",
+        "  SELECT * ",
+        "    FROM sys.certificates ",
+        "   WHERE name = N'${1:sample_certificate}'",
+        ")",
+        "DROP CERTIFICATE ${1:sample_certificate}",
+        "GO",
+        ""
+    ],
+    "description": "Drop Certificate"
+}}

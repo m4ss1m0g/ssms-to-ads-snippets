@@ -1,0 +1,111 @@
+{"Create Full-text Catalog":{
+    "scope": "sql",
+    "prefix": "ssmsCreateFull-textCatalog",
+    "body": [
+        "-- =============================================",
+        "-- Create Full-text catalog template",
+        "-- =============================================",
+        "IF EXISTS ( ",
+        " SELECT * ",
+        "   FROM sys.fulltext_catalogs ",
+        "  WHERE name = N'${1:your_full_text_catalog_name}'",
+        ")",
+        "\tDROP FULLTEXT CATALOG ${1:your_full_text_catalog_name}",
+        "GO",
+        " ",
+        "CREATE FULLTEXT CATALOG ${1:your_full_text_catalog_name}",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Full-text Catalog"
+},"Create Full-text Index":{
+    "scope": "sql",
+    "prefix": "ssmsCreateFull-textIndex",
+    "body": [
+        "-- =============================================",
+        "-- Basic Create Full-text Index Template",
+        "--",
+        "-- This template assumes there is already a ",
+        "-- full-text catalog in your database",
+        "-- =============================================",
+        "IF EXISTS(",
+        "\tSELECT * ",
+        "\t  FROM sys.fulltext_indexes",
+        "      JOIN sys.tables",
+        "        ON sys.tables.object_id = sys.fulltext_indexes.object_id",
+        "\t WHERE sys.tables.name = '${1:your_table_name}'",
+        ")",
+        "  DROP FULLTEXT INDEX ON ${1:your_table_name}",
+        "GO",
+        "",
+        "CREATE FULLTEXT INDEX ON ${1:your_table_name} (${2:your_table_column_name}) ",
+        "\tKEY INDEX ${3:your_full_text_index_name}",
+        "\tON ${4:your_full_text_catalog_name}",
+        "\tWITH (CHANGE_TRACKING = AUTO, STOPLIST = SYSTEM)",
+        "GO",
+        ""
+    ],
+    "description": "Create Full-text Index"
+},"Create Full-text Stoplist":{
+    "scope": "sql",
+    "prefix": "ssmsCreateFull-textStoplist",
+    "body": [
+        "-- =============================================",
+        "-- Create Full-text stoplist template",
+        "-- =============================================",
+        "IF EXISTS ( ",
+        " SELECT * ",
+        "   FROM sys.fulltext_stoplists ",
+        "  WHERE name = N'${1:your_full_text_stoplist_name}'",
+        ")",
+        "\tDROP FULLTEXT STOPLIST ${1:your_full_text_stoplist_name}",
+        "GO",
+        " ",
+        "CREATE FULLTEXT STOPLIST ${1:your_full_text_stoplist_name}",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Full-text Stoplist"
+},"Start Full Population":{
+    "scope": "sql",
+    "prefix": "ssmsStartFullPopulation",
+    "body": [
+        "-- =============================================",
+        "-- Full-text start population template",
+        "-- =============================================",
+        "IF EXISTS(",
+        "\tSELECT * ",
+        "\t  FROM sys.fulltext_indexes",
+        "      JOIN sys.tables",
+        "        ON sys.tables.object_id = sys.fulltext_indexes.object_id",
+        "\t WHERE sys.tables.name = '${1:your_table_name}'",
+        ")",
+        "ALTER FULLTEXT INDEX ON ${1:your_table_name}",
+        "\tSTART FULL POPULATION",
+        "GO",
+        ""
+    ],
+    "description": "Start Full Population"
+},"Stop Population":{
+    "scope": "sql",
+    "prefix": "ssmsStopPopulation",
+    "body": [
+        "-- =============================================",
+        "-- Full-text stop population template",
+        "-- =============================================",
+        "IF EXISTS(",
+        "\tSELECT * ",
+        "\t  FROM sys.fulltext_indexes",
+        "      JOIN sys.tables",
+        "        ON sys.tables.object_id = sys.fulltext_indexes.object_id",
+        "\t WHERE sys.tables.name = '${1:your_table_name}'",
+        ")",
+        "\tALTER FULLTEXT INDEX ON ${1:your_table_name}",
+        "\t\tSTOP POPULATION",
+        "GO",
+        ""
+    ],
+    "description": "Stop Population"
+}}

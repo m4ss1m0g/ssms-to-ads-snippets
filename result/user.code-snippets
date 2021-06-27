@@ -1,0 +1,147 @@
+{"Create User SqlOnDemand":{
+    "scope": "sql",
+    "prefix": "ssmsCreateUserSqlOnDemand",
+    "body": [
+        "-- ======================================================================",
+        "-- Create User as DBO template for Azure Synapse SQL Analytics on-demand",
+        "-- ======================================================================",
+        "-- For login ${1:login_name}, create a user in the database",
+        "CREATE USER ${2:user_name}",
+        "\tFOR LOGIN ${1:login_name}",
+        "\tWITH DEFAULT_SCHEMA = ${3:dbo}",
+        "GO",
+        "",
+        "-- Add user to the database owner role",
+        "ALTER ROLE role_name",
+        "\tADD MEMBER ${2:user_name}"
+    ],
+    "description": "Create User SqlOnDemand"
+},"Create User":{
+    "scope": "sql",
+    "prefix": "ssmsCreateUser",
+    "body": [
+        "-- ========================================================================================",
+        "-- Create User as DBO template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "-- ========================================================================================",
+        "-- For login ${1:login_name}, create a user in the database",
+        "CREATE USER ${2:user_name}",
+        "\tFOR LOGIN ${1:login_name}",
+        "\tWITH DEFAULT_SCHEMA = ${3:dbo}",
+        "GO",
+        "",
+        "-- Add user to the database owner role",
+        "EXEC sp_addrolemember N'db_owner', N'${2:user_name}'",
+        "GO",
+        ""
+    ],
+    "description": "Create User"
+},"Drop User":{
+    "scope": "sql",
+    "prefix": "ssmsDropUser",
+    "body": [
+        "-- ========================================================================================",
+        "-- Create User as DBO template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "-- ========================================================================================",
+        "DROP USER ${1:user_name}",
+        "GO",
+        ""
+    ],
+    "description": "Drop User"
+},"Create Data Reader User":{
+    "scope": "sql",
+    "prefix": "ssmsCreateDataReaderUser",
+    "body": [
+        "-- ===================================",
+        "-- Create Data Reader User template",
+        "-- ===================================",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "-- Create a login using a Windows user",
+        "CREATE LOGIN [${2:domain}\\${3:windows_user}] FROM WINDOWS WITH DEFAULT_DATABASE = ${1:AdventureWorks}",
+        "",
+        "-- Add the user to the database using their login name and the user name",
+        "CREATE USER [${2:domain}\\${3:windows_user}]",
+        "\tFOR LOGIN [${2:domain}\\${3:windows_user}]",
+        "\tWITH DEFAULT_SCHEMA = ${4:Production}",
+        "GO",
+        "",
+        "-- Add user to db_datareader role",
+        "ALTER ROLE [db_datareader]",
+        "ADD MEMBER [${2:domain}\\${3:windows_user}]",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Data Reader User"
+},"Create Schema User":{
+    "scope": "sql",
+    "prefix": "ssmsCreateSchemaUser",
+    "body": [
+        "-- ===================================",
+        "-- Create Schema User template",
+        "-- ===================================",
+        "USE ${1:AdventureWorks};",
+        "GO",
+        "",
+        "-- Create a login using a Windows user",
+        "CREATE LOGIN [${2:domain}\\${3:windows_user}] FROM WINDOWS WITH DEFAULT_DATABASE = ${1:AdventureWorks};",
+        "",
+        "-- Add the user to the database using their login name and the user name",
+        "CREATE USER [${2:domain}\\${3:windows_user}]",
+        "\tFOR LOGIN [${2:domain}\\${3:windows_user}]",
+        "\tWITH DEFAULT_SCHEMA = ${4:Production};",
+        "GO",
+        "",
+        "-- Grant specific access rights to use based on Schema",
+        "GRANT ",
+        "\tDELETE, ",
+        "\tEXECUTE, ",
+        "\tINSERT, ",
+        "\tSELECT, ",
+        "\tUPDATE, ",
+        "\tVIEW DEFINITION ",
+        "ON SCHEMA::[${4:Production}] ",
+        "\tTO [${2:domain}\\${3:windows_user}];",
+        ""
+    ],
+    "description": "Create Schema User"
+},"Create User as DBO":{
+    "scope": "sql",
+    "prefix": "ssmsCreateUserasDBO",
+    "body": [
+        "-- ==============================",
+        "-- Create User as DBO template",
+        "-- ==============================",
+        "",
+        "USE [${1:AdventureWorks}]",
+        "GO",
+        "",
+        "-- For login ${2:login_name}, create a user in the database",
+        "CREATE USER [${3:user_name}]",
+        "\tFOR LOGIN [${2:login_name}]",
+        "\tWITH DEFAULT_SCHEMA = ${4:dbo}",
+        "GO",
+        "",
+        "-- Add user to the database owner role",
+        "ALTER ROLE [db_owner] ",
+        "ADD MEMBER [${3:user_name}]",
+        "GO",
+        ""
+    ],
+    "description": "Create User as DBO"
+},"Drop User":{
+    "scope": "sql",
+    "prefix": "ssmsDropUser",
+    "body": [
+        "-- =====================",
+        "-- Drop User template",
+        "-- =====================",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "DROP USER ${2:user_name}",
+        "GO"
+    ],
+    "description": "Drop User"
+}}

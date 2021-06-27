@@ -1,0 +1,66 @@
+{"Add Extended Property":{
+    "scope": "sql",
+    "prefix": "ssmsAddExtendedProperty",
+    "body": [
+        "-- =============================================",
+        "-- Add extended property ",
+        "-- =============================================",
+        "EXEC sp_addextendedproperty N'${1:n1}', ${2:8},  ",
+        "\t\t\t    N'${3:user}', N'${4:dbo}', ",
+        "\t\t\t    N'${5:table}', N'${6:authors}', ",
+        "\t\t\t    N'${7:column}', N'${8:au_id}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Add Extended Property"
+},"Drop Extended Property":{
+    "scope": "sql",
+    "prefix": "ssmsDropExtendedProperty",
+    "body": [
+        "-- =============================================",
+        "-- Drop extended property ",
+        "-- =============================================",
+        "EXEC sp_dropextendedproperty N'${1:n1}', ",
+        "\t\t\t     N'${2:user}', N'${3:dbo}', ",
+        "\t\t\t     N'${4:table}', N'${5:authors}', ",
+        "\t\t\t     N'${6:column}', N'${7:au_id}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Drop Extended Property"
+},"List Extended Property":{
+    "scope": "sql",
+    "prefix": "ssmsListExtendedProperty",
+    "body": [
+        "-- =============================================",
+        "-- List extended property ",
+        "-- =============================================",
+        "SELECT * FROM ::fn_listextendedproperty(",
+        "\tN'${1:n1}', ",
+        "\tN'${2:user}', N'${3:dbo}', ",
+        "\tN'${4:table}', N'${5:authors}', ",
+        "\tN'${6:column}', N'${7:au_id}')",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "List Extended Property"
+},"Update Extended Property":{
+    "scope": "sql",
+    "prefix": "ssmsUpdateExtendedProperty",
+    "body": [
+        "-- =============================================",
+        "-- Update extended property ",
+        "-- =============================================",
+        "EXEC sp_updateextendedproperty N'${1:n1}', ${2:9}, ",
+        "\t\t\t       N'${3:user}', N'${4:dbo}', ",
+        "\t\t\t       N'${5:table}', N'${6:authors}', ",
+        "\t\t\t       N'${7:column}', N'${8:au_id}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Update Extended Property"
+}}

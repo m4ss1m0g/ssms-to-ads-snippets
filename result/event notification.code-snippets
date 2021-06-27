@@ -1,0 +1,73 @@
+{"Create Database Event Notification":{
+    "scope": "sql",
+    "prefix": "ssmsCreateDatabaseEventNotification",
+    "body": [
+        "-- =============================================",
+        "-- Create Database Event Notification Template",
+        "-- =============================================",
+        "IF EXISTS (SELECT * ",
+        "             FROM sys.event_notifications",
+        "            WHERE name = N'${1:event_name}')",
+        "DROP EVENT NOTIFICATION ${1:event_name}",
+        "ON DATABASE",
+        "GO",
+        "CREATE EVENT NOTIFICATION ${1:event_name}",
+        "ON DATABASE",
+        "WITH FAN_IN",
+        "FOR ${2:ALTER_TABLE}",
+        "TO SERVICE 'broker_service', ${3:'current database'}",
+        "GO"
+    ],
+    "description": "Create Database Event Notification"
+},"Create Server Event Notification":{
+    "scope": "sql",
+    "prefix": "ssmsCreateServerEventNotification",
+    "body": [
+        "-- =============================================",
+        "-- Create Server Event Notification Template",
+        "-- =============================================",
+        "IF EXISTS (SELECT * ",
+        "             FROM sys.server_event_notifications",
+        "            WHERE name = N'${1:}')",
+        "DROP EVENT NOTIFICATION ${1:}",
+        "ON SERVER",
+        "GO",
+        "CREATE EVENT NOTIFICATION ${1:}",
+        "ON SERVER",
+        "WITH FAN_IN",
+        "FOR ${2:}",
+        "TO ${3:}",
+        "GO"
+    ],
+    "description": "Create Server Event Notification"
+},"Drop Database Event Notification":{
+    "scope": "sql",
+    "prefix": "ssmsDropDatabaseEventNotification",
+    "body": [
+        "-- =============================================",
+        "-- Drop Database Event Notification Template",
+        "-- =============================================",
+        "IF EXISTS (SELECT * ",
+        "             FROM sys.event_notifications",
+        "            WHERE name = N'${1:myEventNotification}')",
+        "DROP EVENT NOTIFICATION ${1:myEventNotification}",
+        "ON DATABASE",
+        "GO"
+    ],
+    "description": "Drop Database Event Notification"
+},"Drop Server Event Notification":{
+    "scope": "sql",
+    "prefix": "ssmsDropServerEventNotification",
+    "body": [
+        "-- =============================================",
+        "-- Drop Server Event Notification Template",
+        "-- =============================================",
+        "IF EXISTS (SELECT * ",
+        "             FROM sys.server_event_notifications",
+        "            WHERE name = N'${1:myEventNotification}')",
+        "DROP EVENT NOTIFICATION ${1:myEventNotification}",
+        "ON SERVER",
+        "GO"
+    ],
+    "description": "Drop Server Event Notification"
+}}

@@ -1,0 +1,41 @@
+{"Create Assembly":{
+    "scope": "sql",
+    "prefix": "ssmsCreateAssembly",
+    "body": [
+        "--=============================================================",
+        "-- Create Assembly Template",
+        "--=============================================================",
+        "IF EXISTS(",
+        "\tSELECT *",
+        "\t  FROM sys.assemblies",
+        "\t WHERE name = N'${1:MyClass}'",
+        ")",
+        "DROP ASSEMBLY ${1:MyClass};",
+        "GO",
+        "",
+        "CREATE ASSEMBLY ${1:MyClass}",
+        "FROM N'${2:Path_MyAssembly.dll}'",
+        "WITH PERMISSION_SET = ${3:SAFE};",
+        "GO",
+        ""
+    ],
+    "description": "Create Assembly"
+},"Drop Assembly":{
+    "scope": "sql",
+    "prefix": "ssmsDropAssembly",
+    "body": [
+        "--=============================================================",
+        "-- Drop Assembly Template",
+        "--=============================================================",
+        "IF EXISTS(",
+        "\tSELECT *",
+        "\t  FROM sys.assemblies",
+        "\t WHERE name = N'${1:MyClass}'",
+        ")",
+        "DROP ASSEMBLY ${1:MyClass}",
+        "",
+        "",
+        "  "
+    ],
+    "description": "Drop Assembly"
+}}

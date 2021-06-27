@@ -1,0 +1,188 @@
+{"Alter Database Audit Specification":{
+    "scope": "sql",
+    "prefix": "ssmsAlterDatabaseAuditSpecification",
+    "body": [
+        "-- =============================================",
+        "-- Alter Database Audit Specification Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "ALTER DATABASE AUDIT SPECIFICATION ${4:audit_specification_name}",
+        "FOR SERVER AUDIT ${5:audit_name}",
+        "DROP (SELECT on ${6:table1} BY ${7:user1})",
+        "ADD (INSERT on ${6:table1} BY ${7:user1})",
+        "WITH ( STATE = ${8:OFF} )",
+        "",
+        "",
+        ""
+    ],
+    "description": "Alter Database Audit Specification"
+},"Alter Server Audit Specification":{
+    "scope": "sql",
+    "prefix": "ssmsAlterServerAuditSpecification",
+    "body": [
+        "-- =============================================",
+        "-- Alter Server Audit Specification Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "ALTER SERVER AUDIT SPECIFICATION ${4:audit_specification_name}",
+        "FOR SERVER AUDIT ${5:audit_name}",
+        "DROP(${6:FAILED_LOGIN_GROUP})",
+        "ADD (${7:SUCCESSFUL_LOGIN_GROUP})",
+        "WITH ( STATE = ${8:OFF} )",
+        "",
+        "",
+        ""
+    ],
+    "description": "Alter Server Audit Specification"
+},"Alter Server Audit":{
+    "scope": "sql",
+    "prefix": "ssmsAlterServerAudit",
+    "body": [
+        "-- =============================================",
+        "-- Alter Server Audit Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "ALTER SERVER AUDIT ${4:AUDIT_NAME}",
+        "    TO FILE(FILEPATH = ${5:N'file_path'},",
+        "\t\t\tMAXSIZE=${6:2147483647},",
+        "\t\t\tMAX_ROLLOVER_FILES =${7:0},",
+        "\t\t\tRESERVE_DISK_SPACE =${8:OFF})  ",
+        "\tWITH\t(QUEUE_DELAY = ${9:1000},  ",
+        "\t\t\tON_FAILURE = ${10:SHUTDOWN} )  ",
+        ""
+    ],
+    "description": "Alter Server Audit"
+},"Create Database Audit Specification":{
+    "scope": "sql",
+    "prefix": "ssmsCreateDatabaseAuditSpecification",
+    "body": [
+        "-- =============================================",
+        "-- Create Database Audit Specification Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "CREATE DATABASE AUDIT SPECIFICATION ${4:audit_specification_name}",
+        "FOR SERVER AUDIT ${5:audit_name}",
+        "ADD (SELECT on ${6:table1}BY ${7:user1})         WITH ( STATE = ${8:OFF} )",
+        "",
+        "",
+        ""
+    ],
+    "description": "Create Database Audit Specification"
+},"Create Server Audit Specification":{
+    "scope": "sql",
+    "prefix": "ssmsCreateServerAuditSpecification",
+    "body": [
+        "-- =============================================",
+        "-- Create Server Audit Specification Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "CREATE SERVER AUDIT SPECIFICATION ${4:audit_specification_name}",
+        "FOR SERVER AUDIT ${5:audit_name}",
+        "ADD (${6:FAILED_LOGIN_GROUP} )",
+        "WITH ( STATE = ${7:OFF} )",
+        "",
+        "",
+        ""
+    ],
+    "description": "Create Server Audit Specification"
+},"Create Server Audit":{
+    "scope": "sql",
+    "prefix": "ssmsCreateServerAudit",
+    "body": [
+        "-- =============================================",
+        "-- Create Server Audit Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "CREATE SERVER AUDIT audit_name",
+        "    TO   FILE  (FILEPATH = ${4:N'file_path'},",
+        "\t\t\t\tMAXSIZE=${5:2147483647},",
+        "\t\t\t\tMAX_ROLLOVER_FILES =${6:0},",
+        "\t\t\t\tRESERVE_DISK_SPACE =${7:OFF})  ",
+        "    WITH\t(QUEUE_DELAY = ${8:1000},  ",
+        "\t\t\tON_FAILURE = ${9:SHUTDOWN} )  ",
+        ""
+    ],
+    "description": "Create Server Audit"
+},"Drop Database Audit Specification":{
+    "scope": "sql",
+    "prefix": "ssmsDropDatabaseAuditSpecification",
+    "body": [
+        "-- =============================================",
+        "-- Drop Database Audit Specification Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "DROP DATABASE AUDIT SPECIFICATION ${4:audit_specification_name}",
+        "",
+        ""
+    ],
+    "description": "Drop Database Audit Specification"
+},"Drop Server Audit Specification":{
+    "scope": "sql",
+    "prefix": "ssmsDropServerAuditSpecification",
+    "body": [
+        "-- =============================================",
+        "-- Drop Server Audit Specification Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "DROP SERVER AUDIT SPECIFICATION ${4:audit_specification_name}",
+        ""
+    ],
+    "description": "Drop Server Audit Specification"
+},"Drop Server Audit":{
+    "scope": "sql",
+    "prefix": "ssmsDropServerAudit",
+    "body": [
+        "-- =============================================",
+        "-- Drop Server Audit Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "DROP SERVER AUDIT ${4:audit_name}",
+        ""
+    ],
+    "description": "Drop Server Audit"
+}}

@@ -1,0 +1,61 @@
+{"Create Synonym":{
+    "scope": "sql",
+    "prefix": "ssmsCreateSynonym",
+    "body": [
+        "--==================================================",
+        "-- Create synonym template for Azure SQL Database",
+        "--==================================================",
+        "CREATE SYNONYM ${1:sample_synonym}",
+        "  FOR ${2:Production}.${3:Product}",
+        "GO",
+        ""
+    ],
+    "description": "Create Synonym"
+},"Drop Synonym":{
+    "scope": "sql",
+    "prefix": "ssmsDropSynonym",
+    "body": [
+        "--================================================",
+        "-- Drop synonym template for Azure SQL Database",
+        "--================================================",
+        "IF EXISTS(",
+        "  SELECT *",
+        "    FROM sys.synonyms",
+        "   WHERE name = N'${1:sample_synonym}'",
+        ")",
+        "DROP SYNONYM ${1:sample_synonym}",
+        "GO",
+        ""
+    ],
+    "description": "Drop Synonym"
+},"Create Synonym":{
+    "scope": "sql",
+    "prefix": "ssmsCreateSynonym",
+    "body": [
+        "--===========================",
+        "-- Create synonym template",
+        "--===========================",
+        "CREATE SYNONYM ${1:sample_synonym}",
+        "  FOR ${2:AdventureWorks}.${3:Production}.${4:Product}",
+        "GO",
+        ""
+    ],
+    "description": "Create Synonym"
+},"Drop Synonym":{
+    "scope": "sql",
+    "prefix": "ssmsDropSynonym",
+    "body": [
+        "--===========================",
+        "-- Drop synonym template",
+        "--===========================",
+        "IF EXISTS(",
+        "  SELECT *",
+        "    FROM sys.synonyms",
+        "   WHERE name = N'${1:sample_synonym}'",
+        ")",
+        "DROP SYNONYM ${1:sample_synonym}",
+        "GO",
+        ""
+    ],
+    "description": "Drop Synonym"
+}}

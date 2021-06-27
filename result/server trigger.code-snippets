@@ -1,0 +1,65 @@
+{"Alter Server Trigger":{
+    "scope": "sql",
+    "prefix": "ssmsAlterServerTrigger",
+    "body": [
+        "--====================================",
+        "--  Alter server trigger template ",
+        "--====================================",
+        "ALTER TRIGGER ${1:your_trigger_name} ON ALL SERVER ",
+        "FOR ${2:DROP_DATABASE,ALTER_DATABASE} ",
+        "AS",
+        "IF IS_MEMBER ('db_owner') = 0",
+        "BEGIN",
+        "   PRINT 'You must ask your DBA to drop or alter databases!' ",
+        "   ROLLBACK TRANSACTION",
+        "END",
+        "GO",
+        ""
+    ],
+    "description": "Alter Server Trigger"
+},"Create Server Trigger":{
+    "scope": "sql",
+    "prefix": "ssmsCreateServerTrigger",
+    "body": [
+        "--====================================",
+        "--  Create server trigger template ",
+        "--====================================",
+        "IF EXISTS(",
+        "  SELECT *",
+        "    FROM sys.server_triggers",
+        "   WHERE name = N'${1:your_trigger_name}'",
+        "     AND parent_class_desc = N'SERVER'",
+        ")",
+        "\tDROP TRIGGER ${1:your_trigger_name} ON ALL SERVER",
+        "GO",
+        "",
+        "",
+        "CREATE TRIGGER trigger_name ON ALL SERVER ",
+        "FOR ${2:DROP_DATABASE,ALTER_DATABASE} ",
+        "AS",
+        "IF IS_MEMBER ('db_owner') = 0",
+        "BEGIN",
+        "   PRINT 'You must ask your DBA to drop or alter databases!' ",
+        "   ROLLBACK TRANSACTION",
+        "END",
+        "GO"
+    ],
+    "description": "Create Server Trigger"
+},"Drop Server Trigger":{
+    "scope": "sql",
+    "prefix": "ssmsDropServerTrigger",
+    "body": [
+        "--====================================",
+        "--  Drop server trigger template ",
+        "--====================================",
+        "IF EXISTS(",
+        "  SELECT *",
+        "    FROM sys.server_triggers",
+        "   WHERE name = N'${1:your_trigger_name}'",
+        "     AND parent_class_desc = N'SERVER'",
+        ")",
+        "\tDROP TRIGGER ${1:your_trigger_name} ON ALL SERVER",
+        "GO "
+    ],
+    "description": "Drop Server Trigger"
+}}

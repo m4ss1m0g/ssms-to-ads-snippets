@@ -1,0 +1,103 @@
+{"Create Queue with Activation":{
+    "scope": "sql",
+    "prefix": "ssmsCreateQueuewithActivation",
+    "body": [
+        "-- =============================================",
+        "-- Create Queue with Activation Template",
+        "-- =============================================",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "",
+        "CREATE QUEUE ${4:test_queue}",
+        "   WITH ",
+        "   STATUS = ON,",
+        "   RETENTION = OFF ,",
+        "   ACTIVATION (",
+        "\t\tSTATUS = ON,",
+        "\t\tPROCEDURE_NAME = ${5:test_procedure} ,",
+        "\t\tMAX_QUEUE_READERS = ${6:1}, ",
+        "\t\tEXECUTE AS ${7:SELF} ),",
+        "   POISON_MESSAGE_HANDLING (STATUS = ON) ",
+        "   ON ${8:[DEFAULT]}"
+    ],
+    "description": "Create Queue with Activation"
+},"Create Queue":{
+    "scope": "sql",
+    "prefix": "ssmsCreateQueue",
+    "body": [
+        "-- =============================================",
+        "-- Basic Create Queue Template",
+        "-- =============================================",
+        "",
+        "CREATE QUEUE ${1:test_queue}",
+        ""
+    ],
+    "description": "Create Queue"
+},"Drop Queue":{
+    "scope": "sql",
+    "prefix": "ssmsDropQueue",
+    "body": [
+        "-- =============================================",
+        "-- Basic Drop Queue Template",
+        "-- =============================================",
+        "",
+        "DROP QUEUE ${1:test_queue}",
+        ""
+    ],
+    "description": "Drop Queue"
+},"Turn Off Activation":{
+    "scope": "sql",
+    "prefix": "ssmsTurnOffActivation",
+    "body": [
+        "-- =============================================",
+        "-- Turn Activation Off Template",
+        "-- =============================================",
+        "",
+        "ALTER QUEUE ${1:test_queue} ",
+        "   WITH ACTIVATION ( STATUS =  OFF )  ",
+        ""
+    ],
+    "description": "Turn Off Activation"
+},"Turn Off Queue":{
+    "scope": "sql",
+    "prefix": "ssmsTurnOffQueue",
+    "body": [
+        "-- =============================================",
+        "-- Turn Queue Off Template",
+        "-- =============================================",
+        "",
+        "ALTER QUEUE ${1:test_queue} ",
+        "   WITH STATUS = OFF",
+        ""
+    ],
+    "description": "Turn Off Queue"
+},"Turn On Activation":{
+    "scope": "sql",
+    "prefix": "ssmsTurnOnActivation",
+    "body": [
+        "-- =============================================",
+        "-- Turn Activation ON Template",
+        "-- =============================================",
+        "",
+        "ALTER QUEUE ${1:test_queue} ",
+        "   WITH ACTIVATION ( STATUS =  ON )  ",
+        ""
+    ],
+    "description": "Turn On Activation"
+},"Turn On Queue":{
+    "scope": "sql",
+    "prefix": "ssmsTurnOnQueue",
+    "body": [
+        "-- =============================================",
+        "-- Turn Queue On Template",
+        "-- =============================================",
+        "",
+        "ALTER QUEUE ${1:test_queue} ",
+        "   WITH STATUS = ON",
+        ""
+    ],
+    "description": "Turn On Queue"
+}}

@@ -1,0 +1,18 @@
+{"Create Statistics Template":{
+    "scope": "sql",
+    "prefix": "ssmsCreateStatisticsTemplate",
+    "body": [
+        "-- =============================================",
+        "-- Create Statistics Template",
+        "-- =============================================",
+        "CREATE STATISTICS ${1:stats_test} ",
+        "ON ${2:t1} ",
+        "\t(${3:c1})",
+        "WITH",
+        "SAMPLE ${4:50} PERCENT",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Statistics Template"
+}}

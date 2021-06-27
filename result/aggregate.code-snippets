@@ -1,0 +1,42 @@
+{"Create Aggregate":{
+    "scope": "sql",
+    "prefix": "ssmsCreateAggregate",
+    "body": [
+        "-- =============================================",
+        "-- Create Aggregate Template",
+        "-- =============================================",
+        "IF EXISTS(",
+        "\tSELECT * ",
+        "      FROM sys.objects",
+        "\t WHERE name = N'${1:sample_aggregate}' ",
+        "       AND (type = 'AF')",
+        ")  ",
+        "\tDROP AGGREGATE ${1:sample_aggregate}",
+        "GO",
+        "",
+        "CREATE AGGREGATE ${1:sample_aggregate}(@${2:parameter1} ${3:nvarchar(4000)})",
+        "\tRETURNS ${4:nvarchar(4000)}",
+        "\tEXTERNAL NAME ${5:sample_assembly}.${6:sample_clr_name}",
+        "GO",
+        ""
+    ],
+    "description": "Create Aggregate"
+},"Drop Aggregate":{
+    "scope": "sql",
+    "prefix": "ssmsDropAggregate",
+    "body": [
+        "-- =============================================",
+        "-- Drop Aggregate Template",
+        "-- =============================================",
+        "IF EXISTS(",
+        "\tSELECT * ",
+        "      FROM sys.objects",
+        "\t WHERE name = N'${1:test_agg}' ",
+        "       AND (type = 'AF')",
+        ")  ",
+        "\tDROP AGGREGATE ${1:test_agg}",
+        "GO",
+        ""
+    ],
+    "description": "Drop Aggregate"
+}}

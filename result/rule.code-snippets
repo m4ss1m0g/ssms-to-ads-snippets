@@ -1,0 +1,47 @@
+{"Create Bound Rule":{
+    "scope": "sql",
+    "prefix": "ssmsCreateBoundRule",
+    "body": [
+        "-- =============================",
+        "-- Create Bound Rule template",
+        "-- =============================",
+        "-- This feature is marked for deprecation",
+        "",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "-- Define the rule for use in the database",
+        "CREATE RULE ${2:dbo}.${3:positive_value}",
+        "AS",
+        "\t@value >= 0",
+        "GO",
+        "",
+        "-- Bind the rule to a specific column in a table",
+        "EXEC sp_bindrule ",
+        "\t'${2:dbo}.${3:positive_value}',",
+        "\t'${4:Sales}.${5:SalesOrderDetail}.${6:OrderQty}'",
+        "GO",
+        ""
+    ],
+    "description": "Create Bound Rule"
+},"Unbind Rule":{
+    "scope": "sql",
+    "prefix": "ssmsUnbindRule",
+    "body": [
+        "-- =============================",
+        "-- Unbind Rule template",
+        "-- =============================",
+        "-- This feature is marked for deprecation",
+        "",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "-- Assumes that designated column has a bound rule",
+        "-- Unbind the rule from the column",
+        "EXEC sp_unbindrule",
+        "\t'${2:Sales}.${3:SalesOrderDetail}.${4:OrderQty}'",
+        "GO",
+        ""
+    ],
+    "description": "Unbind Rule"
+}}

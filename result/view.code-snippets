@@ -1,0 +1,114 @@
+{"Create View SqlOnDemand":{
+    "scope": "sql",
+    "prefix": "ssmsCreateViewSqlOnDemand",
+    "body": [
+        "-- ===============================================================",
+        "-- Create View template for Azure Synapse SQL Analytics on-demand",
+        "-- ===============================================================",
+        "",
+        "IF object_id(N'${1:dbo}.${2:Top10CovidCases}', 'V') IS NOT NULL",
+        "\tDROP VIEW ${1:dbo}.${2:Top10CovidCases}",
+        "GO",
+        "",
+        "CREATE VIEW ${1:dbo}.${2:Top10CovidCases} AS",
+        "<select_statement, ,",
+        "SELECT TOP 10 * FROM OPENROWSET(",
+        "        BULK     'https://pandemicdatalake.blob.core.windows.net/public/curated/covid-19/ecdc_cases/latest/ecdc_cases.parquet',",
+        "        FORMAT = 'parquet'",
+        "    ) AS [r] ORDER BY Year DESC",
+        ">"
+    ],
+    "description": "Create View SqlOnDemand"
+},"Create View":{
+    "scope": "sql",
+    "prefix": "ssmsCreateView",
+    "body": [
+        "-- =================================================================================",
+        "-- Create View template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "-- =================================================================================",
+        "",
+        "IF object_id(N'${1:dbo}.${2:Top10Sales}', 'V') IS NOT NULL",
+        "\tDROP VIEW ${1:dbo}.${2:Top10Sales}",
+        "GO",
+        "",
+        "CREATE VIEW ${1:dbo}.${2:Top10Sales} AS",
+        "${3:SELECT TOP 10 * FROM Sales.SalesOrderHeader ORDER BY TotalDue DESC}",
+        ""
+    ],
+    "description": "Create View"
+},"Drop View":{
+    "scope": "sql",
+    "prefix": "ssmsDropView",
+    "body": [
+        "--================================================================================",
+        "-- Drop View template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "--================================================================================",
+        "IF EXISTS (",
+        "  SELECT *",
+        "\tFROM sys.views",
+        "\tJOIN sys.schemas",
+        "\t  ON views.schema_id = schemas.schema_id",
+        "   WHERE schemas.name = N'${1:your_schema_name}'",
+        "\t AND views.name = N'${2:your_view_name}'",
+        ")",
+        "  DROP VIEW ${1:your_schema_name}.${3:view_table_name}",
+        "GO",
+        ""
+    ],
+    "description": "Drop View"
+},"Create Indexed View":{
+    "scope": "sql",
+    "prefix": "ssmsCreateIndexedView",
+    "body": [
+        "-- =============================================",
+        "-- Create Indexed View template",
+        "-- =============================================",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIELDS_NULL, QUOTED_IDENTIFIER ON",
+        "SET NUMERIC_ROUNDABORT OFF",
+        "",
+        "IF object_id(N'${2:dbo}.${3:SalesByOrderDate}', 'V') IS NOT NULL",
+        "\tDROP VIEW ${2:dbo}.${3:SalesByOrderDate}",
+        "GO",
+        "",
+        "CREATE VIEW ${2:dbo}.${3:SalesByOrderDate} ",
+        "WITH SCHEMABINDING AS",
+        "${4:SELECT OrderDate,count_big(*) C,SUM(TotalDue) DateTotal FROM Sales.SalesOrderHeader GROUP BY OrderDate}",
+        "",
+        "GO",
+        "CREATE UNIQUE CLUSTERED INDEX ${3:SalesByOrderDate}_IndexedView",
+        "ON ${2:dbo}.${3:SalesByOrderDate}(${5:OrderDate})",
+        "",
+        ""
+    ],
+    "description": "Create Indexed View"
+},"Create View":{
+    "scope": "sql",
+    "prefix": "ssmsCreateView",
+    "body": [
+        "-- =============================================",
+        "-- Create View template",
+        "-- =============================================",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "IF object_id(N'${2:dbo}.${3:Top10Sales}', 'V') IS NOT NULL",
+        "\tDROP VIEW ${2:dbo}.${3:Top10Sales}",
+        "GO",
+        "",
+        "CREATE VIEW ${2:dbo}.${3:Top10Sales} AS",
+        "${4:SELECT TOP 10 * FROM Sales.SalesOrderHeader ORDER BY TotalDue DESC}"
+    ],
+    "description": "Create View"
+},"Drop View":{
+    "scope": "sql",
+    "prefix": "ssmsDropView",
+    "body": [
+        "-- =============================================",
+        "-- Drop View template",
+        "-- =============================================",
+        "DROP VIEW ${1:dbo}.${2:Top10Sales}"
+    ],
+    "description": "Drop View"
+}}

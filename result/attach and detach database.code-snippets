@@ -1,0 +1,46 @@
+{"Attach Database Template":{
+    "scope": "sql",
+    "prefix": "ssmsAttachDatabaseTemplate",
+    "body": [
+        "-- =============================================",
+        "-- Attach database via sp_attach_db",
+        "-- =============================================",
+        "EXECUTE sp_attach_db @dbname    = N'${1:test_db}', ",
+        "   \t\t     @filename1 = N'${2:c:\\program files\\microsoft sql server\\mssql\\data\\test_db.mdf}',",
+        "   \t\t     @filename2 = N'${3:c:\\program files\\microsoft sql server\\mssql\\data\\test_db_log.ldf}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Attach Database Template"
+},"Attach Single File Database":{
+    "scope": "sql",
+    "prefix": "ssmsAttachSingleFileDatabase",
+    "body": [
+        "-- =============================================",
+        "-- Attach database via sp_attach_single_file_db",
+        "-- =============================================",
+        "-- note: it builds a new log file and performs additional cleanup work ",
+        "-- \t to remove replication from the newly attached database",
+        "EXECUTE sp_attach_single_file_db @dbname   = N'${1:test_db}', ",
+        "   \t\t     \t\t @physname = N'${2:c:\\program files\\microsoft sql server\\mssql\\data\\test_db.mdf}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Attach Single File Database"
+},"Detach Database Template":{
+    "scope": "sql",
+    "prefix": "ssmsDetachDatabaseTemplate",
+    "body": [
+        "-- =============================================",
+        "-- Detach database via sp_detach_db",
+        "-- =============================================",
+        "EXECUTE sp_detach_db @dbname     = N'${1:test_db}', ",
+        "   \t\t     @skipchecks = N'${2:TRUE}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Detach Database Template"
+}}

@@ -1,0 +1,111 @@
+{"Add Linked Server Login":{
+    "scope": "sql",
+    "prefix": "ssmsAddLinkedServerLogin",
+    "body": [
+        "-- =============================================",
+        "-- Add linked server login",
+        "-- =============================================",
+        "sp_addlinkedsrvlogin @rmtsrvname  = N'${1:server1}',",
+        "    \t\t     @useself \t  = '${2:TRUE}',",
+        "   \t\t     @locallogin  = ${3:NULL},",
+        " \t\t     @rmtuser     = ${4:NULL},",
+        "  \t\t     @rmtpassword = ${5:NULL}",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Add Linked Server Login"
+},"Add Non-SQL Server as Linked Server":{
+    "scope": "sql",
+    "prefix": "ssmsAddNon-SQLServerasLinkedServer",
+    "body": [
+        "-- =============================================",
+        "-- Add another non-Sql Server as linked server",
+        "-- =============================================",
+        "sp_addlinkedserver @server     = N'${1:server1}', ",
+        "\t\t   @srvproduct = N'${2:Microsoft.Jet.OLEDB.4.0}',",
+        "   \t\t   @provider   = N'${3:OLE DB Provider for Jet}',",
+        "\t\t   @datasrc    = N'${4:C:\\MSOffice\\Access\\Samples\\Northwind.mdb}', ",
+        "\t\t   @location   = ${5:NULL}, ",
+        "\t\t   @provstr    = ${6:NULL},",
+        "\t\t   @catalog    = ${7:NULL}",
+        "GO",
+        "",
+        "-- =============================================",
+        "-- List linked server",
+        "-- =============================================",
+        "sp_linkedservers",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Add Non-SQL Server as Linked Server"
+},"Add SQL Server as Linked Server":{
+    "scope": "sql",
+    "prefix": "ssmsAddSQLServerasLinkedServer",
+    "body": [
+        "-- =============================================",
+        "-- Add another Sql Server as linked server",
+        "-- =============================================",
+        "sp_addlinkedserver N'${1:server1}', N'SQL Server'",
+        "GO",
+        "",
+        "-- =============================================",
+        "-- List linked server",
+        "-- =============================================",
+        "sp_linkedservers",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Add SQL Server as Linked Server"
+},"Configure Linked Server":{
+    "scope": "sql",
+    "prefix": "ssmsConfigureLinkedServer",
+    "body": [
+        "-- =============================================",
+        "-- Configure linked server ",
+        "-- =============================================",
+        "sp_serveroption @server   = N'${1:server1}', ",
+        "    \t\t@optname  = '${2:dist}',",
+        "    \t\t@optvalue = N'${3:OFF}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Configure Linked Server"
+},"Drop Linked Server Login":{
+    "scope": "sql",
+    "prefix": "ssmsDropLinkedServerLogin",
+    "body": [
+        "-- =============================================",
+        "-- Drop linked server login",
+        "-- =============================================",
+        "sp_droplinkedsrvlogin @rmtsrvname = N'${1:server1}', ",
+        "\t\t      @locallogin = N'${2:test_login}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Drop Linked Server Login"
+},"Drop Linked Server":{
+    "scope": "sql",
+    "prefix": "ssmsDropLinkedServer",
+    "body": [
+        "-- =============================================",
+        "-- Drop linked server",
+        "-- =============================================",
+        "sp_dropserver @server     = N'${1:server1}', ",
+        "\t      @droplogins = ${2:NULL}",
+        "GO",
+        "",
+        "-- =============================================",
+        "-- List linked server",
+        "-- =============================================",
+        "sp_linkedservers",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Drop Linked Server"
+}}

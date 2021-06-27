@@ -1,0 +1,189 @@
+{"Add Server Role Member":{
+    "scope": "sql",
+    "prefix": "ssmsAddServerRoleMember",
+    "body": [
+        "-- ==================================",
+        "-- Add Server Role Member template",
+        "-- ==================================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Add an existing principal as a role member",
+        "ALTER SERVER ROLE [${1:Server_Role_Name}] ",
+        "ADD MEMBER [${2:Server_Principal_Name}]",
+        "GO",
+        ""
+    ],
+    "description": "Add Server Role Member"
+},"Change Server Role Owner":{
+    "scope": "sql",
+    "prefix": "ssmsChangeServerRoleOwner",
+    "body": [
+        "-- =====================================",
+        "-- Change owning principal template",
+        "-- =====================================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Alter the server principal that owns the server role",
+        "ALTER AUTHORIZATION ON SERVER ROLE :: [${1:Server_Role_Name}]",
+        "TO [${2:sa}]",
+        "GO",
+        ""
+    ],
+    "description": "Change Server Role Owner"
+},"Create Server Role":{
+    "scope": "sql",
+    "prefix": "ssmsCreateServerRole",
+    "body": [
+        "-- ==============================",
+        "-- Create Server Role template",
+        "-- ==============================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Drop the server role if it already exists",
+        "IF  EXISTS (",
+        "\tSELECT name ",
+        "\t\tFROM sys.server_principals ",
+        "\t\tWHERE name = N'${1:New_Server_Role}'",
+        ")",
+        "DROP SERVER ROLE [${1:New_Server_Role}]",
+        "",
+        "",
+        "-- Create the server role",
+        "CREATE SERVER ROLE [${1:New_Server_Role}]",
+        "AUTHORIZATION [${2:sa}]",
+        "GO",
+        ""
+    ],
+    "description": "Create Server Role"
+},"Deny Server Role Permission":{
+    "scope": "sql",
+    "prefix": "ssmsDenyServerRolePermission",
+    "body": [
+        "-- ==========================================",
+        "-- Deny Permission on Server Role template",
+        "-- ==========================================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Deny access rights on a specific server role on the server",
+        "DENY",
+        "\tALTER,",
+        "\tCONTROL,",
+        "\tTAKE OWNERSHIP,",
+        "\tVIEW DEFINITION",
+        "ON SERVER ROLE :: [${1:Server_Role_Name}]",
+        "\tTO [${2:Server_Principal_Name}]\t",
+        "\tCASCADE",
+        "\tAS [${3:Server_Principal_Name}]",
+        "GO",
+        ""
+    ],
+    "description": "Deny Server Role Permission"
+},"Drop Server Role Member":{
+    "scope": "sql",
+    "prefix": "ssmsDropServerRoleMember",
+    "body": [
+        "-- ====================================",
+        "-- Drop Server Role Member template",
+        "-- ====================================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Revoke membership of an existing principal from a server role",
+        "ALTER SERVER ROLE [${1:Server_Role_Name}] ",
+        "DROP MEMBER [${2:Server_Principal_Name}]",
+        "GO",
+        ""
+    ],
+    "description": "Drop Server Role Member"
+},"Drop Server Role":{
+    "scope": "sql",
+    "prefix": "ssmsDropServerRole",
+    "body": [
+        "-- ============================",
+        "-- Drop Server Role template",
+        "-- ============================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Drop the server role if it exists",
+        "IF  EXISTS (",
+        "\tSELECT name ",
+        "\t\tFROM sys.server_principals ",
+        "\t\tWHERE name = N'${1:Server_Role_Name}'",
+        ")",
+        "",
+        "-- Drop an existing server role",
+        "DROP SERVER ROLE [${1:Server_Role_Name}] ",
+        "GO",
+        ""
+    ],
+    "description": "Drop Server Role"
+},"Grant Server Role Permission":{
+    "scope": "sql",
+    "prefix": "ssmsGrantServerRolePermission",
+    "body": [
+        "-- ==========================================",
+        "-- Grant Permission on Server Role template",
+        "-- ==========================================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Grant access rights on a specific server role on the server",
+        "GRANT",
+        "\tALTER,",
+        "\tCONTROL,",
+        "\tTAKE OWNERSHIP,",
+        "\tVIEW DEFINITION",
+        "ON SERVER ROLE :: [${1:Server_Role_Name}]",
+        "\tTO [${2:Server_Principal_Name}]\t",
+        "\tWITH GRANT OPTION",
+        "\tAS [${3:Server_Principal_Name}]",
+        "GO",
+        ""
+    ],
+    "description": "Grant Server Role Permission"
+},"Rename Server Role":{
+    "scope": "sql",
+    "prefix": "ssmsRenameServerRole",
+    "body": [
+        "-- =====================================",
+        "-- Rename Server Role Member template",
+        "-- =====================================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Rename the server role",
+        "ALTER SERVER ROLE [${1:Server_Role_Name}] ",
+        "WITH NAME = [${2:New_Name}]",
+        "GO",
+        ""
+    ],
+    "description": "Rename Server Role"
+},"Revoke Server Role Permission":{
+    "scope": "sql",
+    "prefix": "ssmsRevokeServerRolePermission",
+    "body": [
+        "-- ==========================================",
+        "-- Revoke Permission on Server Role template",
+        "-- ==========================================",
+        "USE [master]",
+        "GO",
+        "",
+        "-- Revoke access rights on a specific server role on the server",
+        "REVOKE GRANT OPTION FOR",
+        "\tALTER,",
+        "\tCONTROL,",
+        "\tTAKE OWNERSHIP,",
+        "\tVIEW DEFINITION",
+        "ON SERVER ROLE :: [${1:Server_Role_Name}]",
+        "\tTO [${2:Server_Principal_Name}]\t",
+        "\tCASCADE",
+        "\tAS [${3:Server_Principal_Name}]",
+        "GO"
+    ],
+    "description": "Revoke Server Role Permission"
+}}

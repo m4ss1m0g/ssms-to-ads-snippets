@@ -1,0 +1,41 @@
+{"Create User-defined Data Type":{
+    "scope": "sql",
+    "prefix": "ssmsCreateUser-definedDataType",
+    "body": [
+        "-- ================================",
+        "-- Create User-defined Data Type",
+        "-- ================================",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "-- Create the data type",
+        "CREATE TYPE ${2:dbo}.${3:Phone} ",
+        "\tFROM ${4:nvarchar} (${5:25}) ${6:NULL}",
+        "",
+        "-- Create table using the data type",
+        "CREATE TABLE ${7:test_data_type}",
+        "(",
+        "\tID int NOT NULL,",
+        "\tPhone ${2:dbo}.${3:Phone} NULL",
+        ")",
+        "GO",
+        ""
+    ],
+    "description": "Create User-defined Data Type"
+},"Drop User-defined Data Type":{
+    "scope": "sql",
+    "prefix": "ssmsDropUser-definedDataType",
+    "body": [
+        "-- ================================",
+        "-- Create User-defined Data Type",
+        "-- ================================",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "-- Drop the data type - this will fail if it is being used",
+        "DROP TYPE ${2:dbo}.${3:Phone}",
+        "GO",
+        ""
+    ],
+    "description": "Drop User-defined Data Type"
+}}

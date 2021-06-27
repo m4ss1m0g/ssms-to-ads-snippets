@@ -1,0 +1,73 @@
+{"Create Login for SysAdmin User":{
+    "scope": "sql",
+    "prefix": "ssmsCreateLoginforSysAdminUser",
+    "body": [
+        "-- ==========================================",
+        "-- Create Login For SysAdmin User template",
+        "-- ==========================================",
+        "",
+        "CREATE LOGIN [${1:domain}\\${2:windows_user}] FROM WINDOWS WITH DEFAULT_DATABASE= ${3:master}",
+        "GO",
+        "ALTER SERVER ROLE [sysadmin] ",
+        "ADD MEMBER [${1:domain}\\${2:windows_user}]",
+        "GO",
+        "",
+        " "
+    ],
+    "description": "Create Login for SysAdmin User"
+},"Create SQL Login Must Change Password":{
+    "scope": "sql",
+    "prefix": "ssmsCreateSQLLoginMustChangePassword",
+    "body": [
+        "-- =================================================",
+        "-- Create SQL Login Must Change Password template",
+        "-- =================================================",
+        "",
+        "CREATE LOGIN ${1:login_name} ",
+        "\tWITH PASSWORD = N'${2:Change_Password}' ",
+        "\tMUST_CHANGE,",
+        "\tCHECK_POLICY = ${3:ON};",
+        "GO",
+        ""
+    ],
+    "description": "Create SQL Login Must Change Password"
+},"Drop Login":{
+    "scope": "sql",
+    "prefix": "ssmsDropLogin",
+    "body": [
+        "-- ======================",
+        "-- Drop Login template",
+        "-- ======================",
+        "",
+        "DROP LOGIN ${1:login_name}",
+        "GO"
+    ],
+    "description": "Drop Login"
+},"Create Login":{
+    "scope": "sql",
+    "prefix": "ssmsCreateLogin",
+    "body": [
+        "-- ======================================================================================",
+        "-- Create SQL Login template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "-- ======================================================================================",
+        "",
+        "CREATE LOGIN ${1:login_name} ",
+        "\tWITH PASSWORD = '${2:Change_Password}' ",
+        "GO",
+        ""
+    ],
+    "description": "Create Login"
+},"Drop Login":{
+    "scope": "sql",
+    "prefix": "ssmsDropLogin",
+    "body": [
+        "-- ====================================================================================",
+        "-- Drop SQL Login template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "-- ====================================================================================",
+        "",
+        "DROP LOGIN ${1:login_name}",
+        "Go",
+        ""
+    ],
+    "description": "Drop Login"
+}}

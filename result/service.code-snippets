@@ -1,0 +1,66 @@
+{"Add Contract to Service":{
+    "scope": "sql",
+    "prefix": "ssmsAddContracttoService",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Add contract to service Template",
+        "-- =============================================",
+        "",
+        "ALTER SERVICE [${1:test_service}] ",
+        " ( ADD CONTRACT ${2:test_contract} )",
+        "",
+        "",
+        ""
+    ],
+    "description": "Add Contract to Service"
+},"Create Initiator Service":{
+    "scope": "sql",
+    "prefix": "ssmsCreateInitiatorService",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Basic Create Initiator Service Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "",
+        "CREATE SERVICE [${4:test_service}] ",
+        "AUTHORIZATION ${5:dbo} ",
+        "ON QUEUE ${6:test_queue}",
+        "([DEFAULT])",
+        ""
+    ],
+    "description": "Create Initiator Service"
+},"Create Target Service":{
+    "scope": "sql",
+    "prefix": "ssmsCreateTargetService",
+    "body": [
+        "-- =============================================",
+        "-- Basic Create Target Service Template",
+        "-- =============================================",
+        "",
+        "CREATE SERVICE [${1:test_service}] ",
+        "   ON QUEUE ${2:test_queue}",
+        "   (${3:test_contract} )",
+        "",
+        ""
+    ],
+    "description": "Create Target Service"
+},"Drop Service":{
+    "scope": "sql",
+    "prefix": "ssmsDropService",
+    "body": [
+        "-- =============================================",
+        "-- Basic Drop Service Template",
+        "-- =============================================",
+        "",
+        "DROP SERVICE [${1:test_service}] ",
+        ""
+    ],
+    "description": "Drop Service"
+}}

@@ -1,0 +1,49 @@
+{"Add Message Type Validation":{
+    "scope": "sql",
+    "prefix": "ssmsAddMessageTypeValidation",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Add Validation to Message Type Template",
+        "-- =============================================",
+        "",
+        "ALTER MESSAGE TYPE ${1:test_msg} VALIDATION = ",
+        "    VALID_XML WITH SCHEMA COLLECTION ${2:test_schema}",
+        "",
+        ""
+    ],
+    "description": "Add Message Type Validation"
+},"Create Message Type":{
+    "scope": "sql",
+    "prefix": "ssmsCreateMessageType",
+    "body": [
+        "-- =============================================",
+        "-- Create Message Type Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:Name}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "",
+        "CREATE MESSAGE TYPE ${4:test_msg} ",
+        "AUTHORIZATION ${5:dbo} ",
+        "VALIDATION = ${6:NONE}",
+        " ",
+        ""
+    ],
+    "description": "Create Message Type"
+},"Drop Message Type":{
+    "scope": "sql",
+    "prefix": "ssmsDropMessageType",
+    "body": [
+        "-- =============================================",
+        "-- Basic Drop Message Type Template",
+        "-- =============================================",
+        "",
+        "DROP MESSAGE TYPE ${1:test_msg}",
+        ""
+    ],
+    "description": "Drop Message Type"
+}}

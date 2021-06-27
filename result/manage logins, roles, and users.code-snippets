@@ -1,0 +1,154 @@
+{"Add Login to Server Role":{
+    "scope": "sql",
+    "prefix": "ssmsAddLogintoServerRole",
+    "body": [
+        "-- =============================================",
+        "-- Add login to server roles",
+        "-- =============================================",
+        "sp_addsrvrolemember @loginame = N'${1:REDMOND\\john}', ",
+        "\t\t    @rolename = N'${2:sysadmin}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Add Login to Server Role"
+},"Add SQL Server Login":{
+    "scope": "sql",
+    "prefix": "ssmsAddSQLServerLogin",
+    "body": [
+        "-- =============================================",
+        "-- Add Sql Server login",
+        "-- =============================================",
+        "sp_addlogin @loginame    = N'${1:test_login}',",
+        "\t    @passwd      = '${2:123#$}',",
+        "\t    @defdb       = N'${3:pubs}',",
+        "\t    @deflanguage = N'${4:German}',",
+        "\t    @sid         = ${5:NULL},",
+        "\t    @encryptopt  = ${6:NULL}",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Add SQL Server Login"
+},"Add User to Database Role":{
+    "scope": "sql",
+    "prefix": "ssmsAddUsertoDatabaseRole",
+    "body": [
+        "-- =============================================",
+        "-- Add user to database role",
+        "-- =============================================",
+        "sp_addrolemember @rolename = N'${1:db_owner}', ",
+        "\t\t @membername = N'${2:test_user}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Add User to Database Role"
+},"Deny SQL Server Access":{
+    "scope": "sql",
+    "prefix": "ssmsDenySQLServerAccess",
+    "body": [
+        "-- =============================================",
+        "-- Deny Sql Server access to Windows user or group",
+        "-- =============================================",
+        "sp_denylogin @loginame = N'${1:REDMOND\\john}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Deny SQL Server Access"
+},"Drop Login from Server Role":{
+    "scope": "sql",
+    "prefix": "ssmsDropLoginfromServerRole",
+    "body": [
+        "-- =============================================",
+        "-- Drop login from server role",
+        "-- =============================================",
+        "sp_dropsrvrolemember @loginame = N'${1:REDMOND\\john}', ",
+        "\t\t     @rolename = N'${2:sysadmin}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Drop Login from Server Role"
+},"Drop SQL Server Login":{
+    "scope": "sql",
+    "prefix": "ssmsDropSQLServerLogin",
+    "body": [
+        "-- =============================================",
+        "-- Drop Sql Server login",
+        "-- =============================================",
+        "sp_droplogin @loginame = N'${1:test_login}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Drop SQL Server Login"
+},"Drop User from Database Role":{
+    "scope": "sql",
+    "prefix": "ssmsDropUserfromDatabaseRole",
+    "body": [
+        "-- =============================================",
+        "-- Drop user from database role",
+        "-- =============================================",
+        "sp_droprolemember @rolename   = N'${1:db_owner}', ",
+        "\t\t  @membername = N'${2:johnny}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Drop User from Database Role"
+},"Grant Database Access":{
+    "scope": "sql",
+    "prefix": "ssmsGrantDatabaseAccess",
+    "body": [
+        "-- =============================================",
+        "-- Grant dbaccess to login (Windows or Sql Server login)",
+        "-- =============================================",
+        "sp_grantdbaccess @loginame   = N'${1:REDMOND\\john}', ",
+        "\t\t @name_in_db = N'${2:johnny}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Grant Database Access"
+},"Grant SQL Server Access":{
+    "scope": "sql",
+    "prefix": "ssmsGrantSQLServerAccess",
+    "body": [
+        "-- =============================================",
+        "-- Grant Sql Server access to Windows user or group",
+        "-- =============================================",
+        "sp_grantlogin @loginame = N'${1:REDMOND\\john}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Grant SQL Server Access"
+},"Revoke Database Access":{
+    "scope": "sql",
+    "prefix": "ssmsRevokeDatabaseAccess",
+    "body": [
+        "-- =============================================",
+        "-- Revoke dbaccess from User (User name in current Database, Windows User, or Sql Server login)",
+        "-- =============================================",
+        "sp_revokedbaccess @name_in_db = N'${1:test_user}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Revoke Database Access"
+},"Revoke SQL Server Access":{
+    "scope": "sql",
+    "prefix": "ssmsRevokeSQLServerAccess",
+    "body": [
+        "-- =============================================",
+        "-- Revoke Sql Server access to Windows user or group",
+        "-- =============================================",
+        "sp_revokelogin @loginame = N'${1:REDMOND\\john}'",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Revoke SQL Server Access"
+}}

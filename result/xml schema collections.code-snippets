@@ -1,0 +1,49 @@
+{"Alter XML Schema Collection":{
+    "scope": "sql",
+    "prefix": "ssmsAlterXMLSchemaCollection",
+    "body": [
+        "-- =============================================",
+        "-- Alter XML Schema Collection Template",
+        "-- =============================================",
+        "IF EXISTS (SELECT * ",
+        "             FROM sys.xml_schema_collections ",
+        "            WHERE name = N'${1:mySchemaCollection}')",
+        "ALTER XML SCHEMA COLLECTION ${1:mySchemaCollection}",
+        "ADD '${2:string_containing_xml_schemas}'",
+        "GO"
+    ],
+    "description": "Alter XML Schema Collection"
+},"Create XML Schema Collection":{
+    "scope": "sql",
+    "prefix": "ssmsCreateXMLSchemaCollection",
+    "body": [
+        "-- =============================================",
+        "-- Create XML Schema Collection Template",
+        "-- =============================================",
+        "IF EXISTS (SELECT * ",
+        "             FROM sys.xml_schema_collections ",
+        "            WHERE name = N'${1:mySchemaCollection}')",
+        "DROP XML SCHEMA COLLECTION ${1:mySchemaCollection}",
+        "GO",
+        "",
+        "CREATE XML SCHEMA COLLECTION ${1:mySchemaCollection}",
+        "AS ",
+        "'${2:string_containing_xml_schemas}'",
+        "GO"
+    ],
+    "description": "Create XML Schema Collection"
+},"Drop XML Schema Collection":{
+    "scope": "sql",
+    "prefix": "ssmsDropXMLSchemaCollection",
+    "body": [
+        "-- =============================================",
+        "-- Drop XML Schema Collection Template",
+        "-- =============================================",
+        "IF EXISTS (SELECT * ",
+        "             FROM sys.xml_schema_collections ",
+        "            WHERE name = N'${1:mySchemaCollection}')",
+        "DROP XML SCHEMA COLLECTION ${1:mySchemaCollection}",
+        "GO"
+    ],
+    "description": "Drop XML Schema Collection"
+}}

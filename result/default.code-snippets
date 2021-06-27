@@ -1,0 +1,84 @@
+{"Create Default":{
+    "scope": "sql",
+    "prefix": "ssmsCreateDefault",
+    "body": [
+        "-- ==========================",
+        "-- Create Default template",
+        "-- ==========================",
+        "-- This feature is marked for deprecation",
+        "",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "CREATE DEFAULT ${2:dbo}.${3:today}",
+        "AS",
+        "   getdate()",
+        "GO",
+        "",
+        "-- Bind the default to a column",
+        "EXEC sp_bindefault ",
+        "   N'${2:dbo}.${3:today}', ",
+        "   N'${4:HumanResources}.${5:Employee}.${6:HireDate}'",
+        "GO",
+        ""
+    ],
+    "description": "Create Default"
+},"Default Constraint":{
+    "scope": "sql",
+    "prefix": "ssmsDefaultConstraint",
+    "body": [
+        "-- ============================ ",
+        "-- Create default constraint",
+        "-- ============================ ",
+        "",
+        "ALTER TABLE ${1:dbo}.${2:table_name}",
+        "   ADD CONSTRAINT df_${3:column_name}",
+        "   DEFAULT ${4:0}",
+        "   FOR ${3:column_name}",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Default Constraint"
+},"Drop Default Constraint":{
+    "scope": "sql",
+    "prefix": "ssmsDropDefaultConstraint",
+    "body": [
+        "-- ===================================",
+        "-- Drop Default Constraint template",
+        "-- ===================================",
+        "",
+        "ALTER TABLE ${1:dbo}.${2:table_name}",
+        "   DROP CONSTRAINT ${3:default_constraint_name}",
+        "GO",
+        ""
+    ],
+    "description": "Drop Default Constraint"
+},"Drop Default":{
+    "scope": "sql",
+    "prefix": "ssmsDropDefault",
+    "body": [
+        "-- ========================",
+        "-- Drop Default template",
+        "-- ========================",
+        "-- This feature is marked for deprecation",
+        "",
+        "DROP DEFAULT ${1:dbo}.${2:today}",
+        "GO",
+        ""
+    ],
+    "description": "Drop Default"
+},"Unbind Default":{
+    "scope": "sql",
+    "prefix": "ssmsUnbindDefault",
+    "body": [
+        "-- ==========================",
+        "-- Unbind Default template",
+        "-- ==========================",
+        "-- This feature is marked for deprecation",
+        "",
+        "EXEC sp_unbindefault N'${1:HumanResources}.${2:Employee}.${3:HireDate}'",
+        "GO"
+    ],
+    "description": "Unbind Default"
+}}

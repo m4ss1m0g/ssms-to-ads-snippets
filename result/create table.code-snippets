@@ -1,0 +1,153 @@
+{"Create Table Basic Template":{
+    "scope": "sql",
+    "prefix": "ssmsCreateTableBasicTemplate",
+    "body": [
+        "-- =============================================",
+        "-- Create table basic template",
+        "-- =============================================",
+        "IF EXISTS(SELECT name ",
+        "\t  FROM \t sysobjects ",
+        "\t  WHERE  name = N'${1:test_table}' ",
+        "\t  AND \t type = 'U')",
+        "    DROP TABLE ${1:test_table}",
+        "GO",
+        "",
+        "CREATE TABLE ${1:test_table} (",
+        "${2:c1} ${3:int} NULL, ",
+        "${4:c2} ${5:int} NOT NULL)",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Table Basic Template"
+},"Create Table Specifying Constraints":{
+    "scope": "sql",
+    "prefix": "ssmsCreateTableSpecifyingConstraints",
+    "body": [
+        "-- =============================================",
+        "-- Create table specify constraints",
+        "-- =============================================",
+        "IF EXISTS (SELECT name ",
+        "\t   FROM   sysobjects ",
+        "\t   WHERE  name = N'${1:test_table}' ",
+        "\t   AND    type = 'U')",
+        "    DROP TABLE ${1:test_table}",
+        "GO",
+        "",
+        "CREATE TABLE ${1:test_table} (",
+        "${2:c1} ${3:int} NOT NULL, ",
+        "${4:c2} ${5:int} NOT NULL",
+        "\tCONSTRAINT ${6:check_c2} CHECK(c2 > 0),",
+        "CONSTRAINT ${7:pk_c1} PRIMARY KEY (c1) )",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Table Specifying Constraints"
+},"Create Table Specifying Filegroups":{
+    "scope": "sql",
+    "prefix": "ssmsCreateTableSpecifyingFilegroups",
+    "body": [
+        "-- =============================================",
+        "-- Create table specifying filegroups",
+        "-- =============================================",
+        "IF EXISTS (SELECT name ",
+        "\t   FROM   sysobjects ",
+        "\t   WHERE  name = N'${1:test_table}' ",
+        "\t   AND \t  type = 'U')",
+        "    DROP TABLE ${1:test_table}",
+        "GO",
+        "",
+        "CREATE TABLE ${1:test_table} (",
+        "${2:c1} ${3:int} NOT NULL, ",
+        "${4:c2} ${5:text} )",
+        "ON ${6:[PRIMARY]}",
+        "TEXTIMAGE_ON ${7:[PRIMARY]}",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Table Specifying Filegroups"
+},"Create Table with Computed Column":{
+    "scope": "sql",
+    "prefix": "ssmsCreateTablewithComputedColumn",
+    "body": [
+        "-- =============================================",
+        "-- Create table with Computed column",
+        "-- =============================================",
+        "IF EXISTS (SELECT name ",
+        "\t   FROM   sysobjects ",
+        "\t   WHERE  name = N'${1:test_table}' ",
+        "\t   AND \t  type = 'U')",
+        "    DROP TABLE ${1:test_table}",
+        "GO",
+        "",
+        "CREATE TABLE ${1:test_table} (",
+        "${2:c1} ${3:int} NOT NULL, ",
+        "${4:c2} AS ${5:2*c1})",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Table with Computed Column"
+},"Create Table with IDENTITY Column":{
+    "scope": "sql",
+    "prefix": "ssmsCreateTablewithIDENTITYColumn",
+    "body": [
+        "-- =============================================",
+        "-- Create table with IDENTITY column",
+        "-- =============================================",
+        "IF EXISTS (SELECT name ",
+        "\t   FROM   sysobjects ",
+        "\t   WHERE  name = N'${1:test_table}' ",
+        "\t   AND \t  type = 'U')",
+        "    DROP TABLE ${1:test_table}",
+        "GO",
+        "",
+        "create table ${1:test_table} (",
+        "${2:c1} ${3:int} IDENTITY(${4:100}, ${5:1}), ",
+        "${6:c2} ${7:int} NOT NULL)",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Table with IDENTITY Column"
+},"Create Table with ROWGUIDCOL Column":{
+    "scope": "sql",
+    "prefix": "ssmsCreateTablewithROWGUIDCOLColumn",
+    "body": [
+        "-- =============================================",
+        "-- Create table with ROWGUIDCOL column",
+        "-- =============================================",
+        "IF EXISTS (SELECT name ",
+        "\t   FROM   sysobjects ",
+        "\t   WHERE  name = N'${1:test_table}' ",
+        "\t   AND \t  type = 'U')",
+        "    DROP TABLE ${1:test_table}",
+        "GO",
+        "",
+        "create table ${1:test_table} (",
+        "${2:c1} uniqueidentifier ROWGUIDCOL ",
+        "\tCONSTRAINT ${3:const_c1} DEFAULT NEWID(), ",
+        "${4:c2} ${5:int} NOT NULL)",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Table with ROWGUIDCOL Column"
+},"Create Temp Table":{
+    "scope": "sql",
+    "prefix": "ssmsCreateTempTable",
+    "body": [
+        "-- =============================================",
+        "-- Create temp table",
+        "-- =============================================",
+        "CREATE TABLE #${1:test_table} (",
+        "${2:c1} ${3:char} NULL, ",
+        "${4:c2} ${5:int} NOT NULL)",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Temp Table"
+}}

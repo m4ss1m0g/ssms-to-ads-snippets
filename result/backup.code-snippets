@@ -1,0 +1,59 @@
+{"Backup Database":{
+    "scope": "sql",
+    "prefix": "ssmsBackupDatabase",
+    "body": [
+        "-- ===========================",
+        "-- Backup Database Template",
+        "-- ===========================",
+        "BACKUP DATABASE ${1:Database_Name} ",
+        "\tTO  DISK = N'${2:C:\\Program Files\\Microsoft SQL Server\\MSSQL15.MSSQLSERVER\\MSSQL\\Backup\\}${1:Database_Name}.bak' ",
+        "WITH ",
+        "\tNOFORMAT, ",
+        "\tCOMPRESSION,",
+        "\tNOINIT,  ",
+        "\tNAME = N'${1:Database_Name}-Full Database Backup', ",
+        "\tSKIP, ",
+        "\tSTATS = 10;",
+        "GO",
+        ""
+    ],
+    "description": "Backup Database"
+},"Backup Filegroups":{
+    "scope": "sql",
+    "prefix": "ssmsBackupFilegroups",
+    "body": [
+        "-- =============================",
+        "-- Backup Filegroups Template",
+        "-- =============================",
+        "USE master",
+        "GO",
+        "",
+        "BACKUP DATABASE ${1:Database_Name}",
+        "   FILE = N'${2:Logical_File_Name_1}',",
+        "   FILEGROUP = N'PRIMARY',",
+        "   FILE = N'${3:Logical_File_Name_2}', ",
+        "   FILEGROUP = N'${4:Filegroup_1}'",
+        "   TO ${5:Backup_Device_Name}",
+        "GO",
+        " "
+    ],
+    "description": "Backup Filegroups"
+},"Create Backup Device":{
+    "scope": "sql",
+    "prefix": "ssmsCreateBackupDevice",
+    "body": [
+        "-- ================================",
+        "-- Create Backup Device Template",
+        "-- ================================",
+        "USE master",
+        "GO",
+        "",
+        "EXEC master.dbo.sp_addumpdevice  ",
+        "\t@devtype = N'disk', ",
+        "\t@logicalname = N'${1:Backup_Device_Name}', ",
+        "\t@physicalname = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL15.MSSQLSERVER\\MSSQL\\Backup\\${1:Backup_Device_Name}.bak'",
+        "GO",
+        ""
+    ],
+    "description": "Create Backup Device"
+}}

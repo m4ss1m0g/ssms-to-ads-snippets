@@ -1,0 +1,67 @@
+{"Create View Basic Template":{
+    "scope": "sql",
+    "prefix": "ssmsCreateViewBasicTemplate",
+    "body": [
+        "-- =============================================",
+        "-- Create view basic template",
+        "-- =============================================",
+        "IF EXISTS (SELECT TABLE_NAME ",
+        "\t   FROM   INFORMATION_SCHEMA.VIEWS ",
+        "\t   WHERE  TABLE_NAME = N'${1:view_test}')",
+        "    DROP VIEW ${1:view_test}",
+        "GO",
+        "",
+        "CREATE VIEW ${1:view_test}",
+        "AS ",
+        "\t${2:SELECT * FROM authors}",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create View Basic Template"
+},"Create View with CHECK OPTION":{
+    "scope": "sql",
+    "prefix": "ssmsCreateViewwithCHECKOPTION",
+    "body": [
+        "-- =============================================",
+        "-- Create view with CHECK OPTION ",
+        "-- =============================================",
+        "IF EXISTS (SELECT TABLE_NAME ",
+        "\t   FROM   INFORMATION_SCHEMA.VIEWS ",
+        "\t   WHERE  TABLE_NAME = N'${1:view_test}')",
+        "    DROP VIEW ${1:view_test}",
+        "GO",
+        "",
+        "CREATE VIEW ${1:view_test}",
+        "AS ",
+        "\t${2:SELECT * FROM authors}",
+        "WITH CHECK OPTION",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create View with CHECK OPTION"
+},"Create View with SCHEMABINDING":{
+    "scope": "sql",
+    "prefix": "ssmsCreateViewwithSCHEMABINDING",
+    "body": [
+        "-- =============================================",
+        "-- Create schemabinding view",
+        "-- =============================================",
+        "IF EXISTS (SELECT TABLE_NAME ",
+        "\t   FROM   INFORMATION_SCHEMA.VIEWS ",
+        "\t   WHERE  TABLE_NAME = N'${1:view_test}')",
+        "    DROP VIEW ${1:view_test}",
+        "GO",
+        "",
+        "CREATE VIEW ${1:view_test} WITH SCHEMABINDING",
+        "AS ",
+        "${2:SELECT au_id FROM dbo.authors}",
+        "--note: need to specify specific column names and owner of the table ",
+        "--eg. SELECT column_1, column_2 FROM owner.table_or_view_name WHERE search_condition",
+        "GO",
+        "  ",
+        ""
+    ],
+    "description": "Create View with SCHEMABINDING"
+}}

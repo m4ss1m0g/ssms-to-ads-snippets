@@ -1,0 +1,73 @@
+{"Create User-defined Memory Optimized Table Type":{
+    "scope": "sql",
+    "prefix": "ssmsCreateUser-definedMemoryOptimizedTableType",
+    "body": [
+        "--======================================================",
+        "-- Create User-defined Memory Optimized Table Type Template",
+        "-- Use the Specify Values for Template Parameters command (Ctrl-Shift-M) to fill in the parameter values below.",
+        "-- This template creates a memory optimized table type and indexes on the memory optimized table type.",
+        "-- The database must have a MEMORY_OPTIMIZED_DATA filegroup before the memory optimized table type can be created.",
+        "--======================================================",
+        "",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "--Drop table if it already exists.",
+        "IF TYPE_ID('${2:dbo}.${3:sample_memoryoptimizedtabletype}') IS NOT NULL",
+        "    DROP TYPE ${2:dbo}.${3:sample_memoryoptimizedtabletype}",
+        "GO",
+        "",
+        "CREATE TYPE ${2:dbo}.${3:sample_memoryoptimizedtabletype} AS TABLE",
+        "(",
+        "\t${4:c1} ${5:int} ${6:NOT NULL}, ",
+        "\t${7:c2} ${8:float} ${9:NOT NULL},",
+        "\t${10:c3} ${11:decimal(10,2)} ${12:NOT NULL} INDEX ${13:index_sample_memoryoptimizedtabletype_c3} NONCLUSTERED (${10:c3}), ",
+        "",
+        "   PRIMARY KEY NONCLUSTERED (${14:c1}),",
+        "   -- See SQL Server Books Online for guidelines on determining appropriate bucket count for the index",
+        "   INDEX ${15:hash_index_sample_memoryoptimizedtabletype_c2} HASH (${7:c2}) WITH (BUCKET_COUNT = ${16:131072})",
+        ") WITH (MEMORY_OPTIMIZED = ON)",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create User-defined Memory Optimized Table Type"
+},"Create User-defined Table Type":{
+    "scope": "sql",
+    "prefix": "ssmsCreateUser-definedTableType",
+    "body": [
+        "-- ================================",
+        "-- Create User-defined Table Type",
+        "-- ================================",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "-- Create the data type",
+        "CREATE TYPE ${2:dbo}.${3:TVP} AS TABLE ",
+        "(",
+        "\t${4:c1} ${5:int} ${6:NOT NULL}, ",
+        "\t${7:c2} ${8:char(10)} ${9:NULL}, ",
+        "\t${10:c3} ${11:datetime} ${12:NULL}, ",
+        "    PRIMARY KEY (${4:c1})",
+        ")",
+        "GO",
+        ""
+    ],
+    "description": "Create User-defined Table Type"
+},"Drop User-defined Table Type":{
+    "scope": "sql",
+    "prefix": "ssmsDropUser-definedTableType",
+    "body": [
+        "-- ================================",
+        "-- Drop User-defined Table Type",
+        "-- ================================",
+        "USE ${1:AdventureWorks}",
+        "GO",
+        "",
+        "-- Drop the table type - this will fail if it is being used",
+        "DROP TYPE ${2:dbo}.${3:TVP}",
+        "GO",
+        ""
+    ],
+    "description": "Drop User-defined Table Type"
+}}

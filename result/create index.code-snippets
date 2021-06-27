@@ -1,0 +1,42 @@
+{"Create Index Basic":{
+    "scope": "sql",
+    "prefix": "ssmsCreateIndexBasic",
+    "body": [
+        "-- =============================================",
+        "-- Create index basic template",
+        "-- =============================================",
+        "CREATE INDEX ${1:ind_test}",
+        "ON ${2:pubs}.${3:dbo}.${4:authors} ",
+        "\t(${5:au_lname}, ",
+        "\t ${6:au_fname})",
+        "GO",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "description": "Create Index Basic"
+},"Create Index Full Syntax":{
+    "scope": "sql",
+    "prefix": "ssmsCreateIndexFullSyntax",
+    "body": [
+        "-- =============================================",
+        "-- Create index full syntax template",
+        "-- =============================================",
+        "CREATE UNIQUE CLUSTERED INDEX ${1:ind_test}",
+        "ON ${2:pubs}.${3:dbo}.${4:authors} ",
+        "\t(${5:au_lname} DESC, ",
+        "\t ${6:au_fname})",
+        "WITH",
+        "PAD_INDEX,",
+        "FILLFACTOR = ${7:50},",
+        "IGNORE_DUP_KEY,",
+        "DROP_EXISTING,",
+        "STATISTICS_NORECOMPUTE",
+        "ON ${8:[PRIMARY]}",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Index Full Syntax"
+}}

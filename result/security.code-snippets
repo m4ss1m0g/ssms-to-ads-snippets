@@ -1,0 +1,133 @@
+{"Change Remote Service Binding User":{
+    "scope": "sql",
+    "prefix": "ssmsChangeRemoteServiceBindingUser",
+    "body": [
+        "-- =============================================",
+        "-- Change Remote Service Binding User Template",
+        "-- =============================================",
+        "",
+        "ALTER REMOTE SERVICE BINDING [${1:test_binding}]",
+        "  WITH USER = [${2:test_user}]",
+        ""
+    ],
+    "description": "Change Remote Service Binding User"
+},"Create Anonymous Remote Service Binding":{
+    "scope": "sql",
+    "prefix": "ssmsCreateAnonymousRemoteServiceBinding",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Create Anonymous Remote Service Binding Template",
+        "-- =============================================",
+        "",
+        "CREATE REMOTE SERVICE BINDING [${1:test_binding}] ",
+        "  TO SERVICE N'${2:test_service}'",
+        "  WITH USER = [${3:test_user}], ANONYMOUS = ON",
+        " ",
+        ""
+    ],
+    "description": "Create Anonymous Remote Service Binding"
+},"Create Private Key Certificate":{
+    "scope": "sql",
+    "prefix": "ssmsCreatePrivateKeyCertificate",
+    "body": [
+        "-- =============================================",
+        "-- Create Private Key Certificate Template",
+        "-- =============================================",
+        "",
+        "CREATE CERTIFICATE ${1:test_cert}",
+        "   AUTHORIZATION ${2:test_user} ",
+        "   FROM  FILE = '${3:C:\\mycert}'",
+        "   WITH PRIVATE_KEY (FILE = '${4:C:\\mykey}', DECRYPTION_PASSWORD = '${5:passwd}')",
+        ""
+    ],
+    "description": "Create Private Key Certificate"
+},"Create Public Key Certificate":{
+    "scope": "sql",
+    "prefix": "ssmsCreatePublicKeyCertificate",
+    "body": [
+        "-- =============================================",
+        "-- Create Public Key Certificate Template",
+        "-- =============================================",
+        "",
+        "CREATE CERTIFICATE ${1:test_cert}",
+        "   AUTHORIZATION ${2:test_user} ",
+        "   FROM  FILE = '${3:C:\\mycert}'",
+        "",
+        ""
+    ],
+    "description": "Create Public Key Certificate"
+},"Create Remote Service Binding":{
+    "scope": "sql",
+    "prefix": "ssmsCreateRemoteServiceBinding",
+    "body": [
+        "-- =============================================",
+        "-- Basic Create Remote Service Binding Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "",
+        "CREATE REMOTE SERVICE BINDING [${4:test_binding}] ",
+        "  AUTHORIZATION ${5:dbo} ",
+        "  TO SERVICE N'${6:test_service}'",
+        "  WITH USER = [${7:test_user}]",
+        "",
+        ""
+    ],
+    "description": "Create Remote Service Binding"
+},"Drop Certificate":{
+    "scope": "sql",
+    "prefix": "ssmsDropCertificate",
+    "body": [
+        "-- =============================================",
+        "-- Basic Drop Certificate Template",
+        "-- =============================================",
+        "",
+        "DROP CERTIFICATE ${1:test_cert}",
+        ""
+    ],
+    "description": "Drop Certificate"
+},"Drop Remote Service Binding":{
+    "scope": "sql",
+    "prefix": "ssmsDropRemoteServiceBinding",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Basic Drop Remote Service Binding Template",
+        "-- =============================================",
+        "",
+        "DROP REMOTE SERVICE BINDING [${1:test_binding}] ",
+        ""
+    ],
+    "description": "Drop Remote Service Binding"
+},"Grant Receive":{
+    "scope": "sql",
+    "prefix": "ssmsGrantReceive",
+    "body": [
+        "-- =============================================",
+        "-- Grant Receive on Queue Template",
+        "-- =============================================",
+        "",
+        "GRANT RECEIVE ON [${1:test_queue}] ",
+        "   TO [${2:test_user}]",
+        ""
+    ],
+    "description": "Grant Receive"
+},"Grant Send":{
+    "scope": "sql",
+    "prefix": "ssmsGrantSend",
+    "body": [
+        "-- =============================================",
+        "-- Grant Send on Service Template",
+        "-- =============================================",
+        "",
+        "GRANT SEND ON SERVICE::[${1:test_service}]",
+        "   TO [${2:test_user}]",
+        ""
+    ],
+    "description": "Grant Send"
+}}

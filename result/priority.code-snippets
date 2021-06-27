@@ -1,0 +1,57 @@
+{"Alter Broker Priority":{
+    "scope": "sql",
+    "prefix": "ssmsAlterBrokerPriority",
+    "body": [
+        "-- =============================================",
+        "-- Change the Broker Priority Template",
+        "-- =============================================",
+        "",
+        "",
+        "ALTER BROKER PRIORITY ${1:conpriority}",
+        "FOR CONVERSATION",
+        "SET ( CONTRACT_NAME = ${2:ANY} ,",
+        "      LOCAL_SERVICE_NAME = ${3:ANY} ,",
+        "      REMOTE_SERVICE_NAME = ${4:ANY} ,",
+        "      PRIORITY_LEVEL = ${5:DEFAULT}",
+        ")",
+        ""
+    ],
+    "description": "Alter Broker Priority"
+},"Create Broker Priority":{
+    "scope": "sql",
+    "prefix": "ssmsCreateBrokerPriority",
+    "body": [
+        "-- =============================================",
+        "-- Create the Broker Priority Template",
+        "-- =============================================",
+        "",
+        "-- =============================================",
+        "-- Author:\t\t${1:}",
+        "-- Create date: ${2:}",
+        "-- Description:\t${3:}",
+        "-- =============================================",
+        "",
+        "CREATE BROKER PRIORITY ${4:conpriority}",
+        "FOR CONVERSATION",
+        "SET ( CONTRACT_NAME = ${5:ANY} ,",
+        "      LOCAL_SERVICE_NAME = ${6:ANY} ,",
+        "      REMOTE_SERVICE_NAME = N'${7:ANY}' ,",
+        "      PRIORITY_LEVEL = ${8:DEFAULT}",
+        ")",
+        ""
+    ],
+    "description": "Create Broker Priority"
+},"Drop Broker Priority":{
+    "scope": "sql",
+    "prefix": "ssmsDropBrokerPriority",
+    "body": [
+        "-- =============================================",
+        "-- Drop the Broker Priority Template",
+        "-- =============================================",
+        "",
+        "DROP BROKER PRIORITY ${1:conpriority}",
+        "",
+        ""
+    ],
+    "description": "Drop Broker Priority"
+}}

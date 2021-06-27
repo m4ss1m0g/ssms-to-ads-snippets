@@ -1,0 +1,21 @@
+{"Create Broker Endpoint":{
+    "scope": "sql",
+    "prefix": "ssmsCreateBrokerEndpoint",
+    "body": [
+        "",
+        "-- =============================================",
+        "-- Basic Create Service Broker Endpoint Template",
+        "-- =============================================",
+        "",
+        "CREATE ENDPOINT ${1:test_endpoint} ",
+        "AS TCP (",
+        "   LISTENER_PORT = ${2:4022}",
+        "   )",
+        "FOR SERVICE_BROKER (",
+        "   AUTHENTICATION = WINDOWS",
+        "   )",
+        "",
+        ""
+    ],
+    "description": "Create Broker Endpoint"
+}}

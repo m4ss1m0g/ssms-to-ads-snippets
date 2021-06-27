@@ -1,0 +1,31 @@
+{"Create Schema":{
+    "scope": "sql",
+    "prefix": "ssmsCreateSchema",
+    "body": [
+        "-- ===================================================================================",
+        "-- Create Schema Template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "-- ===================================================================================",
+        "",
+        "CREATE SCHEMA ${1:sample_schema}",
+        "AUTHORIZATION ${2:owner_name}",
+        ""
+    ],
+    "description": "Create Schema"
+},"Drop Schema":{
+    "scope": "sql",
+    "prefix": "ssmsDropSchema",
+    "body": [
+        "--==================================================================================",
+        "-- Drop Schema template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "--==================================================================================",
+        "IF EXISTS(",
+        "  SELECT *",
+        "    FROM sys.schemas",
+        "   WHERE name = N'${1:sample_schema}'",
+        ")",
+        "DROP SCHEMA ${1:sample_schema}",
+        "GO",
+        ""
+    ],
+    "description": "Drop Schema"
+}}

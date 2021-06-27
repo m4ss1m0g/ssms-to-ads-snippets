@@ -1,0 +1,155 @@
+{"Create Statistics":{
+    "scope": "sql",
+    "prefix": "ssmsCreateStatistics",
+    "body": [
+        "-- ===============================================================================================",
+        "-- Create Sampled Statistics Template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "-- ===============================================================================================",
+        "CREATE STATISTICS ${1:statistics_name} ",
+        "ON ${2:schema_name}.${3:table_name}",
+        "( ",
+        "   ${4:column1},",
+        "   ${5:column2}",
+        ") ",
+        "WITH SAMPLE ${6:100} PERCENT;",
+        "GO",
+        "-- Instead of PERCENT, you can say ROWS to specify the number of rows to sample.",
+        "",
+        ""
+    ],
+    "description": "Create Statistics"
+},"Drop Statistics":{
+    "scope": "sql",
+    "prefix": "ssmsDropStatistics",
+    "body": [
+        "--======================================================================================",
+        "-- Drop Statistics template for Azure SQL Database and Azure SQL Data Warehouse Database",
+        "--======================================================================================",
+        "IF EXISTS (",
+        "  SELECT *",
+        "\tFROM sys.stats as st",
+        "\tJOIN sys.tables as tb",
+        "\t  ON st.object_id = tb.object_id",
+        "\tJOIN sys.schemas as sc",
+        "\t  ON tb.schema_id = sc.schema_id",
+        "   WHERE sc.name = N'${1:schema_name}'",
+        "\t AND tb.name = N'${2:table_name}'",
+        "\t AND st.name = N'${3:statistics_name}'",
+        ")",
+        "",
+        "DROP STATISTICS ${1:schema_name}.${2:table_name}.${3:statistics_name};",
+        "GO",
+        ""
+    ],
+    "description": "Drop Statistics"
+},"Create Fullscan Norecompute Statistics":{
+    "scope": "sql",
+    "prefix": "ssmsCreateFullscanNorecomputeStatistics",
+    "body": [
+        "-- ==================================================",
+        "-- Create Fullscan Norecompute Statistics Template",
+        "-- ==================================================",
+        "-- Note: Statistics created with NORECOMPUTE are not updated by SQL Server's",
+        "-- automatic statistics update feature (auto-stats). Therefore, they many cause",
+        "-- suboptimal plans.",
+        "CREATE STATISTICS ${1:statistics_name} ",
+        "ON ${2:schema_name}.${3:table_name}",
+        "( ",
+        "   ${4:column1},",
+        "   ${5:column2}",
+        ") ",
+        "WITH FULLSCAN, NORECOMPUTE;",
+        "GO",
+        "",
+        ""
+    ],
+    "description": "Create Fullscan Norecompute Statistics"
+},"Create Fullscan Statistics":{
+    "scope": "sql",
+    "prefix": "ssmsCreateFullscanStatistics",
+    "body": [
+        "-- ======================================",
+        "-- Create Fullscan Statistics Template",
+        "-- ======================================",
+        "CREATE STATISTICS ${1:statistics_name} ",
+        "ON ${2:schema_name}.${3:table_name}",
+        "( ",
+        "   ${4:column1},",
+        "   ${5:column2}",
+        ") ",
+        "WITH FULLSCAN;",
+        "GO",
+        ""
+    ],
+    "description": "Create Fullscan Statistics"
+},"Create Sampled Statistics":{
+    "scope": "sql",
+    "prefix": "ssmsCreateSampledStatistics",
+    "body": [
+        "-- ======================================",
+        "-- Create Sampled Statistics Template",
+        "-- ======================================",
+        "CREATE STATISTICS ${1:statistics_name} ",
+        "ON ${2:schema_name}.${3:table_name}",
+        "( ",
+        "   ${4:column1},",
+        "   ${5:column2}",
+        ") ",
+        "WITH SAMPLE ${6:100} PERCENT;",
+        "GO",
+        "-- Instead of PERCENT, you can say ROWS to specify the number of rows to sample.",
+        "",
+        ""
+    ],
+    "description": "Create Sampled Statistics"
+},"Drop Statistics":{
+    "scope": "sql",
+    "prefix": "ssmsDropStatistics",
+    "body": [
+        "-- ===========================",
+        "-- Drop Statistics Template",
+        "-- ===========================",
+        "IF EXISTS (",
+        "  SELECT *",
+        "\tFROM sys.stats",
+        "\tJOIN sys.tables",
+        "\t  ON sys.stats.object_id = sys.tables.object_id",
+        "\tJOIN sys.schemas",
+        "\t  ON sys.tables.schema_id = sys.schemas.schema_id",
+        "   WHERE sys.schemas.name = N'${1:schema_name}'",
+        "\t AND sys.tables.name = N'${2:table_name}'",
+        "\t AND sys.stats.name = N'${3:statistics_name}'",
+        ")",
+        "",
+        "DROP STATISTICS ${1:schema_name}.${2:table_name}.${3:statistics_name};",
+        "GO",
+        ""
+    ],
+    "description": "Drop Statistics"
+},"Update All Statistics for Table":{
+    "scope": "sql",
+    "prefix": "ssmsUpdateAllStatisticsforTable",
+    "body": [
+        "-- ===========================================",
+        "-- Update All Statistics For Table Template",
+        "-- ===========================================",
+        "",
+        "-- All statistics on the table ${1:schema_name}.${2:table_name}",
+        "-- will be updated.",
+        "UPDATE STATISTICS ${1:schema_name}.${2:table_name}; ",
+        "GO"
+    ],
+    "description": "Update All Statistics for Table"
+},"Update Statistics One Index":{
+    "scope": "sql",
+    "prefix": "ssmsUpdateStatisticsOneIndex",
+    "body": [
+        "-- =======================================",
+        "-- Update Statistics One Index Template",
+        "-- =======================================",
+        "UPDATE STATISTICS ${1:schema_name}.${2:table_name}(${3:index_name}); ",
+        "GO",
+        ""
+    ],
+    "description": "Update Statistics One Index"
+}}
